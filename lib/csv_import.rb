@@ -13,7 +13,6 @@ module CsvImport extend ActiveSupport::Concern
     CSV.foreach(file.path, headers: true) do |row|
       # 取引履歴の場合
       if gamen_kind == "tori"
-        #p "import tori"
         torihiki_rireki = TorihikiRireki.new
 
         # CSVからデータを取得し、設定する
@@ -22,7 +21,7 @@ module CsvImport extend ActiveSupport::Concern
 
       # 企業マスタの場合  
       else  
-        #p "import kigyo"
+ 
         kigyo_master = KigyoMaster.new
 
         # CSVからデータを取得し、設定する
