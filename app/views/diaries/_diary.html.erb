@@ -1,0 +1,26 @@
+<div id="<%= dom_id diary %>">
+  <p>
+    <strong>ID</strong>
+    <%= @diary.id %>
+  </p>
+
+  <p>
+    <strong>タイトル:</strong>
+    <%= @diary.title %>
+  </p>
+
+  <p>
+    <strong>本文:</strong>
+    <%= @diary.body %>
+  </p>
+  
+  <p>
+    <strong>登録日時:</strong>
+    <%= @diary.created_at.to_s(:custom) %>
+  </p>
+  <p>
+    <strong>更新日時:</strong>
+    <%= @diary.updated_at.to_s(:custom) %>
+  </p>
+
+</div>

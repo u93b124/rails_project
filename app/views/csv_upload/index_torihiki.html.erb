@@ -1,0 +1,17 @@
+
+<h1>取引履歴アップロード</h1>
+
+<%= form_with url: "/csv_upload" do |form| %>
+　<%= form.hidden_field :gamen_kind, :value => "tori" %>
+  <%= form.file_field :file, accept: '.csv' %>
+  <%= form.submit "アップロード" %>
+
+  <% if @errors.present? %>
+   <% @errors.each do |error| %>
+     <% error[:messages].each do |message| %>
+       <li><%= "#{error[:row_num]}行目：#{message}" %></li>
+     <% end %>
+   <% end %>
+  <% end %>
+
+<% end %>

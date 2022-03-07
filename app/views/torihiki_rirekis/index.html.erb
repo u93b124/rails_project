@@ -1,0 +1,50 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>取引履歴一覧</h1>
+<%= link_to "取引履歴の追加", new_torihiki_rireki_path %>
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>約定日</th>
+      <th>銘柄</th>
+      <th>銘柄コード</th>
+      <th>市場</th>
+      <th>取引</th>
+      <th>期限</th>
+      <th>預り</th>
+      <th>課税</th>
+      <th>約定数量</th>
+      <th>約定単価</th>
+      <th>手数料/諸経費等</th>
+      <th>税額</th>
+      <th>受渡日</th>
+      <th>受渡金額/決済損益</th>
+    </tr>
+    </thead>
+
+
+<div id="torihiki_rirekis">
+  <% @torihiki_rirekis.each do |torihiki_rireki| %>
+      <tr>
+        <td><%= torihiki_rireki.id %></td>
+        <td><%= torihiki_rireki.yakujobi %></td>
+        <td><%= link_to torihiki_rireki.meigara, torihiki_rireki %></td>
+        <td><%= torihiki_rireki.code %></td>
+        <td><%= torihiki_rireki.market %></td>
+        <td><%= torihiki_rireki.torihiki %></td>
+        <td><%= torihiki_rireki.kigen %></td>
+        <td><%= torihiki_rireki.azukari %></td>
+        <td><%= torihiki_rireki.kazei %></td>
+        <td><%= torihiki_rireki.count %></td>
+        <td><%= torihiki_rireki.tanka %></td>
+        <td><%= torihiki_rireki.tesuu %></td>
+        <td><%= torihiki_rireki.zeigaku %></td>
+        <td><%= torihiki_rireki.ukewatasi %></td>
+        <td><%= torihiki_rireki.kingaku %></td>
+      </tr>
+  <% end %>
+</div>
+
+</table>
+<%= link_to "取引履歴の追加", new_torihiki_rireki_path %>

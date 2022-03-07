@@ -1,0 +1,87 @@
+<%= form_with(model: torihiki_rireki) do |form| %>
+  <% if torihiki_rireki.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(torihiki_rireki.errors.count, "error") %> prohibited this torihiki_rireki from being saved:</h2>
+
+      <ul>
+        <% torihiki_rireki.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :yakujobi, style: "display: block" %>
+    <%= form.date_field :yakujobi %>
+  </div>
+
+  <div>
+    <%= form.label :meigara, style: "display: block" %>
+    <%= form.text_field :meigara %>
+  </div>
+
+  <div>
+    <%= form.label :code, style: "display: block" %>
+    <%= form.number_field :code %>
+  </div>
+
+  <div>
+    <%= form.label :market, style: "display: block" %>
+    <%= form.text_field :market %>
+  </div>
+
+  <div>
+    <%= form.label :torihiki, style: "display: block" %>
+    <%= form.text_field :torihiki %>
+  </div>
+
+  <div>
+    <%= form.label :kigen, style: "display: block" %>
+    <%= form.text_field :kigen %>
+  </div>
+
+  <div>
+    <%= form.label :azukari, style: "display: block" %>
+    <%= form.text_field :azukari %>
+  </div>
+
+  <div>
+    <%= form.label :kazei, style: "display: block" %>
+    <%= form.text_field :kazei %>
+  </div>
+
+  <div>
+    <%= form.label :count, style: "display: block" %>
+    <%= form.number_field :count %>
+  </div>
+
+  <div>
+    <%= form.label :tanka, style: "display: block" %>
+    <%= form.number_field :tanka %>
+  </div>
+
+  <div>
+    <%= form.label :tesuu, style: "display: block" %>
+    <%= form.number_field :tesuu %>
+  </div>
+
+  <div>
+    <%= form.label :zeigaku, style: "display: block" %>
+    <%= form.number_field :zeigaku %>
+  </div>
+
+  <div>
+    <%= form.label :ukewatasi, style: "display: block" %>
+    <%= form.date_field :ukewatasi %>
+  </div>
+
+  <div>
+    <%= form.label :kingaku, style: "display: block" %>
+    <%= form.number_field :kingaku %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

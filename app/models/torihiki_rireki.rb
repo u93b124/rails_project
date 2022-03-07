@@ -1,0 +1,2 @@
+class TorihikiRireki < ApplicationRecord
+end

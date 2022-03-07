@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  yakujobi: 2022-03-07
+  meigara: MyString
+  code: 1
+  market: MyString
+  torihiki: MyString
+  kigen: MyString
+  azukari: MyString
+  kazei: MyString
+  count: 1
+  tanka: 1
+  tesuu: 1
+  zeigaku: 1
+  ukewatasi: 2022-03-07
+  kingaku: 1
+
+two:
+  yakujobi: 2022-03-07
+  meigara: MyString
+  code: 1
+  market: MyString
+  torihiki: MyString
+  kigen: MyString
+  azukari: MyString
+  kazei: MyString
+  count: 1
+  tanka: 1
+  tesuu: 1
+  zeigaku: 1
+  ukewatasi: 2022-03-07
+  kingaku: 1

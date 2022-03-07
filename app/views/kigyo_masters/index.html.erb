@@ -1,0 +1,30 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>企業マスタ一覧</h1>
+<%= link_to "企業の追加", new_kigyo_master_path %>
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>コード</th>
+      <th>企業名</th>
+      <th>市場</th>
+      <th>業種</th>
+    </tr>
+    </thead>
+
+
+<div id="kigyo_masters">
+  <% @kigyo_masters.each do |kigyo_master| %>
+      <tr>
+        <td><%= kigyo_master.id %></td>
+        <td><%= kigyo_master.code %></td>
+        <td><%= link_to kigyo_master.name, kigyo_master %></td>
+        <td><%= kigyo_master.market %></td>
+        <td><%= kigyo_master.kind %></td>
+      </tr>
+  <% end %>
+</div>
+
+</table>
+<%= link_to "企業の追加", new_kigyo_master_path %>
