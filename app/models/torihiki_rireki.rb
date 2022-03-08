@@ -1,5 +1,14 @@
 class TorihikiRireki < ApplicationRecord
 
+  # 証券コードから企業名を取得する
+  def self.get_kigyo_name(wk_cd)
+    ret = ""
+    record  = KigyoMaster.where(code: wk_cd).first
+    ret = record.name unless record.nil?
+    #p "ret = " , ret
+  end
+
+
   # 銘柄毎の損益を算出する
   def self.get_soneki
 
@@ -75,20 +84,25 @@ class TorihikiRireki < ApplicationRecord
 #p "gen_watasi = " , gen_watasi
 
     # 計算用のキーとなる証券コードを取得する
+    # 対象は「株式現物売」+「現渡」－「株式現物買」+ 「現引」+ 「信用返済買」+「信用返済売」
+    str_torihiki = ["株式現物売","現渡","株式現物買","現引","信用返済買","信用返済売"]
     query_cd = "SELECT code " 
     query_cd += "FROM torihiki_rirekis "
+    query_cd += "WHERE torihiki IN (?)"
     query_cd += "GROUP BY code "
     query_cd += "ORDER BY code "
-    ret_cd = TorihikiRireki.find_by_sql( query_cd )
+    ret_cd = TorihikiRireki.find_by_sql( [query_cd, str_torihiki] )
     
+p "ret_cd = " , ret_cd
+
     # キーを元に「株式現物売」+「現渡」－「株式現物買」+ 「現引」+ 「信用返済買」+「信用返済売」
     # の計算結果をハッシュに詰める
     keisan_kekka = {}
 
     ret_cd.each do |rec|
-       p "rec[:code] = " , rec[:code]
+       #p "rec[:code] = " , rec[:code]
        #p "genbutu_uri[rec[:code]] = " , genbutu_uri[rec[:code]]
-       p "genbutu_watasi[rec[:code]] = " , gen_watasi[rec[:code]]
+       #p "genbutu_watasi[rec[:code]] = " , gen_watasi[rec[:code]]
        #p "genbutu_kai[rec[:code]] = " , genbutu_kai[rec[:code]] 
        #p "gen_biki[rec[:code]] = " , gen_biki[rec[:code]]
        #p "hen_uri[rec[:code]]  = " , hen_uri[rec[:code]] 
@@ -135,6 +149,7 @@ class TorihikiRireki < ApplicationRecord
 
     # HashのValueを降順にソート
     keisan_kekka = keisan_kekka.sort_by { |_, v| v }.reverse.to_h
+
   end
 
 end

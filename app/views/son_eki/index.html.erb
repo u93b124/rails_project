@@ -6,7 +6,8 @@
   <thead>
     <tr>
       <th>順位</th>
-      <th>コード</th> 
+      <th>コード</th>
+      <th>会社名</th>
       <th>損益額</th>
     </tr>
     </thead>
@@ -19,6 +20,7 @@
         <% i = i + 1 %>
         <td><%= i %></td>
         <td><%= son_eki[0] %></td>
+        <td><%= get_kigyo_name(son_eki[0]) %></td>
         <td><%= number_with_delimiter(son_eki[1]) %></td>
       </tr>
     <% end %>
