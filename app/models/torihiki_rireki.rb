@@ -19,6 +19,8 @@ class TorihikiRireki < ApplicationRecord
       genbutu_kai[rec[:code]] = rec[:kingaku] 
     end
 
+#p "genbutu_kai = " , genbutu_kai
+
     # 該当の証券コード毎に「株式現物売」の金額を取得する
     ret2 = TorihikiRireki.find_by_sql( [query, "株式現物売"] )
     #p "ret2 =" ,ret2
@@ -28,6 +30,7 @@ class TorihikiRireki < ApplicationRecord
     ret2.each do |rec|
       genbutu_uri[rec[:code]] = rec[:kingaku] 
     end
+#p "genbutu_uri = " , genbutu_uri
 
     # 該当の証券コード毎に「現引」の金額を取得する
     ret3 = TorihikiRireki.find_by_sql( [query, "現引"] )
@@ -39,17 +42,16 @@ class TorihikiRireki < ApplicationRecord
       gen_biki[rec[:code]] = rec[:kingaku] 
     end
 
-#p "gen_biki = " , gen_biki
-
     # 計算用のキーとなる証券コードを取得する
     query_cd = "SELECT code " 
     query_cd += "FROM torihiki_rirekis "
     query_cd += "GROUP BY code "
     query_cd += "ORDER BY code "
     ret_cd = TorihikiRireki.find_by_sql( query_cd )
-
+    
     # キーを元に「株式現物売」－「株式現物買」+ 「現引」の計算結果をハッシュに詰める
     keisan_kekka = {}
+
     ret_cd.each do |rec|
        #p "rec[:code] = " , rec[:code]
        #p "genbutu_uri[rec[:code]] = " , genbutu_uri[rec[:code]]
@@ -57,25 +59,24 @@ class TorihikiRireki < ApplicationRecord
        #p "gen_biki[rec[:code]] = " , gen_biki[rec[:code]]
        # nil だと計算式で落ちるので 0 設定する
        if genbutu_uri[rec[:code]].nil?
-         genbutu_uri = 0
+         wk_uri = 0
        else
-         genbutu_uri = genbutu_uri[rec[:code]]
+         wk_uri = genbutu_uri[rec[:code]]
        end
          
        if genbutu_kai[rec[:code]].nil?
-        genbutu_kai = 0
+        wk_kai = 0
        else
-        genbutu_kai = genbutu_kai[rec[:code]]
+        wk_kai = genbutu_kai[rec[:code]]
        end
 
        if gen_biki[rec[:code]].nil?
-        gen_biki = 0
+        wk_biki = 0
        else
-        gen_biki = gen_biki[rec[:code]]
+        wk_biki = gen_biki[rec[:code]]
        end
 
-       keisan_kekka[rec[:code]]  = genbutu_uri - genbutu_kai + gen_biki
-        #keisan_kekka[rec[:code]] = genbutu_uri[rec[:code]] - genbutu_kai[rec[:code]] + gen_biki[rec[:code]]      
+       keisan_kekka[rec[:code]]  = wk_uri - wk_kai + wk_biki      
     end
 
     # HashのValueを降順にソート
