@@ -42,6 +42,38 @@ class TorihikiRireki < ApplicationRecord
       gen_biki[rec[:code]] = rec[:kingaku] 
     end
 
+    # 該当の証券コード毎に「信用返済売」の金額を取得する
+    ret4 = TorihikiRireki.find_by_sql( [query, "信用返済売"] )
+    #p "ret4 =" ,ret4
+
+    # 「信用返済売」の金額　をハッシュに詰める
+    hen_uri = {}
+    ret4.each do |rec|
+      hen_uri[rec[:code]] = rec[:kingaku] 
+    end
+#p "hen_uri = " , hen_uri
+
+    # 該当の証券コード毎に「信用返済買」の金額を取得する
+    ret5 = TorihikiRireki.find_by_sql( [query, "信用返済買"] )
+    #p "ret5 =" ,ret5
+
+    # 「信用返済買」の金額　をハッシュに詰める
+    hen_kai = {}
+    ret5.each do |rec|
+      hen_kai[rec[:code]] = rec[:kingaku] 
+    end
+
+    # 該当の証券コード毎に「現渡」の金額を取得する
+    ret6 = TorihikiRireki.find_by_sql( [query, "現渡"] )
+    #p "ret6 =" ,ret6
+
+    # 「株式現物売」の金額　をハッシュに詰める
+    gen_watasi = {}
+    ret6.each do |rec|
+      gen_watasi[rec[:code]] = rec[:kingaku] 
+    end
+#p "gen_watasi = " , gen_watasi
+
     # 計算用のキーとなる証券コードを取得する
     query_cd = "SELECT code " 
     query_cd += "FROM torihiki_rirekis "
@@ -49,14 +81,18 @@ class TorihikiRireki < ApplicationRecord
     query_cd += "ORDER BY code "
     ret_cd = TorihikiRireki.find_by_sql( query_cd )
     
-    # キーを元に「株式現物売」－「株式現物買」+ 「現引」の計算結果をハッシュに詰める
+    # キーを元に「株式現物売」+「現渡」－「株式現物買」+ 「現引」+ 「信用返済買」+「信用返済売」
+    # の計算結果をハッシュに詰める
     keisan_kekka = {}
 
     ret_cd.each do |rec|
-       #p "rec[:code] = " , rec[:code]
+       p "rec[:code] = " , rec[:code]
        #p "genbutu_uri[rec[:code]] = " , genbutu_uri[rec[:code]]
+       p "genbutu_watasi[rec[:code]] = " , gen_watasi[rec[:code]]
        #p "genbutu_kai[rec[:code]] = " , genbutu_kai[rec[:code]] 
        #p "gen_biki[rec[:code]] = " , gen_biki[rec[:code]]
+       #p "hen_uri[rec[:code]]  = " , hen_uri[rec[:code]] 
+       #p "hen_kai[rec[:code]]  = " , hen_kai[rec[:code]] 
        # nil だと計算式で落ちるので 0 設定する
        if genbutu_uri[rec[:code]].nil?
          wk_uri = 0
@@ -64,6 +100,12 @@ class TorihikiRireki < ApplicationRecord
          wk_uri = genbutu_uri[rec[:code]]
        end
          
+       if gen_watasi[rec[:code]].nil?
+        wk_watasi = 0
+       else
+        wk_watasi = gen_watasi[rec[:code]]
+       end
+
        if genbutu_kai[rec[:code]].nil?
         wk_kai = 0
        else
@@ -76,7 +118,19 @@ class TorihikiRireki < ApplicationRecord
         wk_biki = gen_biki[rec[:code]]
        end
 
-       keisan_kekka[rec[:code]]  = wk_uri - wk_kai + wk_biki      
+       if hen_uri[rec[:code]].nil?
+        wk_hen_uri = 0
+       else
+        wk_hen_uri = hen_uri[rec[:code]]
+       end
+
+       if hen_kai[rec[:code]].nil?
+        wk_hen_kai = 0
+       else
+        wk_hen_kai = hen_kai[rec[:code]]
+       end
+
+       keisan_kekka[rec[:code]]  = wk_uri + wk_watasi - wk_kai + wk_biki + wk_hen_uri + wk_hen_kai
     end
 
     # HashのValueを降順にソート
