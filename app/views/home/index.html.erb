@@ -2,18 +2,25 @@
   <li><a href="http://192.168.56.2:3000/kigyo_masters">企業マスタ一覧</a>
   <li><a href="http://192.168.56.2:3000/csv_upload/index">企業マスタアップロード</a>
 </menu>
-<br><hr><br>
+<br><hr>
 <menu>
   <li><a href="http://192.168.56.2:3000/torihiki_rirekis">取引履歴データ一覧</a>
   <li><a href="http://192.168.56.2:3000/csv_upload/index_torihiki">取引履歴アップロード</a>
 </menu>
-<br><hr><br>
+<br><hr>
 <menu>
   <li><a href="http://192.168.56.2:3000/jyoto_eki_meisais">譲渡益明細データ一覧</a>
   <li><a href="http://192.168.56.2:3000/csv_upload/index_jyo_to_eki">譲渡益明細アップロード</a>
 </menu>
-<br><hr><br>
+<br><hr>
 <menu>
-  <li><a href="http://192.168.56.2:3000/son_eki">取引履歴集計</a>
+  <li><a href="http://192.168.56.2:3000/son_eki">取引履歴集計（前年度の買明細がないので不完全）</a>
   <li><a href="http://192.168.56.2:3000/jyoto_eki_syukei">譲渡益明細集計</a>
 </menu>
+
+<br>
+■使い方<br>
+1. csvを成形し不要な行を取り除く<br>
+2. CSVのヘッダーをＤＢカラム（英語）に差し替える<br>
+3. CSVをエディタで開き、UTF8Nで保存する<br>
+4. 画面からアップロードをする（最初にTRUNCATEされる）<br>
