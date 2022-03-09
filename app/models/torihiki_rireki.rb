@@ -28,8 +28,6 @@ class TorihikiRireki < ApplicationRecord
       genbutu_kai[rec[:code]] = rec[:kingaku] 
     end
 
-#p "genbutu_kai = " , genbutu_kai
-
     # 該当の証券コード毎に「株式現物売」の金額を取得する
     ret2 = TorihikiRireki.find_by_sql( [query, "株式現物売"] )
     #p "ret2 =" ,ret2
@@ -39,7 +37,6 @@ class TorihikiRireki < ApplicationRecord
     ret2.each do |rec|
       genbutu_uri[rec[:code]] = rec[:kingaku] 
     end
-#p "genbutu_uri = " , genbutu_uri
 
     # 該当の証券コード毎に「現引」の金額を取得する
     ret3 = TorihikiRireki.find_by_sql( [query, "現引"] )
@@ -60,11 +57,9 @@ class TorihikiRireki < ApplicationRecord
     ret4.each do |rec|
       hen_uri[rec[:code]] = rec[:kingaku] 
     end
-#p "hen_uri = " , hen_uri
 
     # 該当の証券コード毎に「信用返済買」の金額を取得する
     ret5 = TorihikiRireki.find_by_sql( [query, "信用返済買"] )
-    #p "ret5 =" ,ret5
 
     # 「信用返済買」の金額　をハッシュに詰める
     hen_kai = {}
@@ -74,14 +69,12 @@ class TorihikiRireki < ApplicationRecord
 
     # 該当の証券コード毎に「現渡」の金額を取得する
     ret6 = TorihikiRireki.find_by_sql( [query, "現渡"] )
-    #p "ret6 =" ,ret6
 
     # 「株式現物売」の金額　をハッシュに詰める
     gen_watasi = {}
     ret6.each do |rec|
       gen_watasi[rec[:code]] = rec[:kingaku] 
     end
-#p "gen_watasi = " , gen_watasi
 
     # 計算用のキーとなる証券コードを取得する
     # 対象は「株式現物売」+「現渡」－「株式現物買」+ 「現引」+ 「信用返済買」+「信用返済売」
@@ -93,8 +86,6 @@ class TorihikiRireki < ApplicationRecord
     query_cd += "ORDER BY code "
     ret_cd = TorihikiRireki.find_by_sql( [query_cd, str_torihiki] )
     
-p "ret_cd = " , ret_cd
-
     # キーを元に「株式現物売」+「現渡」－「株式現物買」+ 「現引」+ 「信用返済買」+「信用返済売」
     # の計算結果をハッシュに詰める
     keisan_kekka = {}

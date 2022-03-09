@@ -1,0 +1,46 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>譲渡益明細一覧</h1>
+<%= link_to "譲渡益明細の追加", new_jyoto_eki_meisai_path %>
+<table border="1">
+  <thead>
+    <tr>
+      <th>銘柄コード</th>
+      <th>銘柄</th>
+      <th>譲渡益取消区分</th>
+      <th>約定日</th>
+      <th>数量</th>
+      <th>取引</th>
+      <th>受渡日</th>
+      <th>売却/決済金額</th>
+      <th>費用</th>
+      <th>取得/新規年月日</th>
+      <th>取得/新規金額</th>
+      <th>損益金額/徴収額</th>
+      <th>地方税</th>
+    </tr>
+    </thead>
+
+<div id="jyoto_eki_meisais">
+  <% @jyoto_eki_meisais.each do |jyoto_eki_meisai| %>
+      <tr>
+        <td><%= jyoto_eki_meisai.id %></td>
+        <td><%= jyoto_eki_meisai.code %></td>
+        <td><%= link_to jyoto_eki_meisai.name, jyoto_eki_meisai %></td>
+        <td><%= jyoto_eki_meisai.torikesi %></td>
+        <td><%= jyoto_eki_meisai.yakujo_bi %></td>
+        <td><%= jyoto_eki_meisai.count %></td>
+        <td><%= jyoto_eki_meisai.torihiki %></td>
+        <td><%= jyoto_eki_meisai.ukewatasi %></td>
+        <td><%= jyoto_eki_meisai.baikyaku %></td>
+        <td><%= jyoto_eki_meisai.hiyo %></td>
+        <td><%= jyoto_eki_meisai.syutoku_bi %></td>
+        <td><%= jyoto_eki_meisai.sinki_gaku %></td>
+        <td><%= jyoto_eki_meisai.son_eki_gaku %></td>
+        <td><%= jyoto_eki_meisai.chiho %></td>
+      </tr>
+  <% end %>
+</div>
+
+</table>
+<%= link_to "譲渡益明細の追加", new_jyoto_eki_meisai_path %>

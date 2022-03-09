@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>譲渡益集計</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>コード</th>
+      <th>会社名</th>
+      <th>損益額</th>
+    </tr>
+    </thead>
+
+<% if @jyoto_eki_syukeis != nil %>
+  <div id="son_ekis">
+    <% i = 0 %>
+    <% @jyoto_eki_syukeis.each do |jyoto_eki| %>
+      <tr>
+        <% i = i + 1 %>
+        <td><%= i %></td>
+        <td><%= jyoto_eki.code %></td>
+        <td><%= jyoto_eki.name %></td>
+        <td><%= number_with_delimiter(jyoto_eki.son_eki_gaku) %></td>
+      </tr>
+    <% end %>
+  </div>      
+<% end %>
+
+
+</table>
+

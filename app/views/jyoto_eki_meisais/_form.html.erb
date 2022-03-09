@@ -1,0 +1,82 @@
+<%= form_with(model: jyoto_eki_meisai) do |form| %>
+  <% if jyoto_eki_meisai.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(jyoto_eki_meisai.errors.count, "error") %> prohibited this jyoto_eki_meisai from being saved:</h2>
+
+      <ul>
+        <% jyoto_eki_meisai.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :code, style: "display: block" %>
+    <%= form.number_field :code %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :torikesi, style: "display: block" %>
+    <%= form.text_field :torikesi %>
+  </div>
+
+  <div>
+    <%= form.label :yakujo_bi, style: "display: block" %>
+    <%= form.date_field :yakujo_bi %>
+  </div>
+
+  <div>
+    <%= form.label :count, style: "display: block" %>
+    <%= form.number_field :count %>
+  </div>
+
+  <div>
+    <%= form.label :torihiki, style: "display: block" %>
+    <%= form.text_field :torihiki %>
+  </div>
+
+  <div>
+    <%= form.label :ukewatasi, style: "display: block" %>
+    <%= form.date_field :ukewatasi %>
+  </div>
+
+  <div>
+    <%= form.label :baikyaku, style: "display: block" %>
+    <%= form.number_field :baikyaku %>
+  </div>
+
+  <div>
+    <%= form.label :hiyo, style: "display: block" %>
+    <%= form.number_field :hiyo %>
+  </div>
+
+  <div>
+    <%= form.label :syutoku_bi, style: "display: block" %>
+    <%= form.date_field :syutoku_bi %>
+  </div>
+
+  <div>
+    <%= form.label :sinki_gaku, style: "display: block" %>
+    <%= form.number_field :sinki_gaku %>
+  </div>
+
+  <div>
+    <%= form.label :son_eki_gaku, style: "display: block" %>
+    <%= form.number_field :son_eki_gaku %>
+  </div>
+
+  <div>
+    <%= form.label :chiho, style: "display: block" %>
+    <%= form.number_field :chiho %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

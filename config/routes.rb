@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
+  resources :jyoto_eki_meisais
   resources :torihiki_rirekis
   resources :kigyo_masters
   resources :diaries
   
-  # 企業マスタアップロード画面
+  # 各アップロード画面
   get 'csv_upload/index', to: "csv_upload#index"
   get 'csv_upload/index_torihiki', to: "csv_upload#index_torihiki"
+  get 'csv_upload/index_jyo_to_eki', to: "csv_upload#index_jyo_to_eki"
 
-  # 損益管理画面
+  # 取引履歴集計 画面
   get 'son_eki', to: 'son_eki#index'
+ 
+  # 譲渡益集計 画面
+  get 'jyoto_eki_syukei', to: 'jyoto_eki_syukei#index'
 
   # ユーザ画面
   get 'users', to: 'users#index'

@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: 1
+  name: MyString
+  torikesi: MyString
+  yakujo_bi: 2022-03-09
+  count: 1
+  torihiki: MyString
+  ukewatasi: 2022-03-09
+  baikyaku: 1
+  hiyo: 1
+  syutoku_bi: 2022-03-09
+  sinki_gaku: 1
+  son_eki_gaku: 1
+  chiho: 1
+
+two:
+  code: 1
+  name: MyString
+  torikesi: MyString
+  yakujo_bi: 2022-03-09
+  count: 1
+  torihiki: MyString
+  ukewatasi: 2022-03-09
+  baikyaku: 1
+  hiyo: 1
+  syutoku_bi: 2022-03-09
+  sinki_gaku: 1
+  son_eki_gaku: 1
+  chiho: 1
