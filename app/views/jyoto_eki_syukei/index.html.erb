@@ -1,7 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>譲渡益集計</h1>
+<h3>（受渡日：<font color = "red"><%= @nen %></font>年01月01日～
+<font color = "red"><%= @nen %></font>年12月31日）</h3>
 
+<%= link_to "2020年", jyoto_eki_syukei_path(nen: "2020") %>
+<%= link_to "2021年", jyoto_eki_syukei_path(nen: "2021") %>
+<%= link_to "2022年", jyoto_eki_syukei_path(nen: "2022") %>
 <table border="1">
   <thead>
     <tr>
@@ -21,7 +26,15 @@
         <td><%= i %></td>
         <td><%= jyoto_eki.code %></td>
         <td><%= jyoto_eki.name %></td>
-        <td><%= number_with_delimiter(jyoto_eki.son_eki_gaku) %></td>
+        <td>
+          <% if jyoto_eki.son_eki_gaku < 0 %>
+            <font color = "red">
+          <% end %>
+          <%= number_with_delimiter(jyoto_eki.son_eki_gaku) %>
+          <% if jyoto_eki.son_eki_gaku < 0 %>
+            </font>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </div>      

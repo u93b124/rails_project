@@ -8,7 +8,8 @@ module CsvImport extend ActiveSupport::Concern
     elsif gamen_kind == "kigyo"
       ActiveRecord::Base.connection.execute("TRUNCATE TABLE kigyo_masters;")
     elsif gamen_kind == "jyoto"
-      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisais;")
+      #譲渡損益税明細は、2020/2021/2022 の３つのcsvを続けてアップロードするため truncateしない
+      #ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisais;")
     end
     CSV.foreach(file.path, headers: true) do |row|
       # 取引履歴の場合
