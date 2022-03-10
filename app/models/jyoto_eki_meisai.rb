@@ -18,4 +18,30 @@ class JyotoEkiMeisai < ApplicationRecord
     ret = self.find_by_sql([query, from_date, to_date])
   end
 
+ # 譲渡益明細ＤＢから利益額合計、損失額合計、全体の損益を算出する
+  def self.get_total_soneki(nen)
+    # 日付の組み立て
+    from_date = nen + "-01-01"
+    to_date = nen + "-12-31"
+   
+    # SQL
+    query = "SELECT SUM(son_eki_gaku) AS son_eki_gaku "
+    query += "FROM jyoto_eki_meisais " 
+    query += "WHERE son_eki_gaku >= 0 "
+    query += "AND ukewatasi BETWEEN ? AND ? "     
+    query += "UNION "
+    query += "SELECT SUM(son_eki_gaku) AS son_eki_gaku "
+    query += "FROM jyoto_eki_meisais "
+    query += "WHERE son_eki_gaku < 0 "
+    query += "AND ukewatasi BETWEEN ? AND ? " 
+    query += "UNION "
+    query += "SELECT SUM(son_eki_gaku) AS son_eki_gaku "
+    query += "FROM jyoto_eki_meisais "
+    query += "WHERE ukewatasi BETWEEN ? AND ? " 
+    
+    ret = self.find_by_sql([query, from_date, to_date, from_date, to_date, from_date, to_date])
+
+  end
+
+
 end
