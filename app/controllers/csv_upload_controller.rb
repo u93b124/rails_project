@@ -22,7 +22,7 @@ class CsvUploadController < ApplicationController
       redirect_to action: 'index_torihiki' 
     # 譲渡益明細CSVの場合
     elsif params[:gamen_kind] == "jyoto"
-      @errors = import(params[:file],"jyoto")
+      @errors = import(params[:file],"jyoto", params[:nendo])
       redirect_to action: 'index_jyo_to_eki' 
     # 企業マスタCSVの場合
     elsif params[:gamen_kind] == "kigyo"

@@ -1,14 +1,25 @@
 module CsvImport extend ActiveSupport::Concern
 
-  #引数：file,gamen_kind(取引履歴:tori／企業マスタ:kigyo)
-  def import(file,gamen_kind)
+  #引数：file,gamen_kind(取引履歴:tori／企業マスタ:kigyo) , :nendo（年度）
+  def import(file,gamen_kind, nendo)
     # インポート前に古いデータを一旦削除する
     if gamen_kind == "tori"
       ActiveRecord::Base.connection.execute("TRUNCATE TABLE torihiki_rirekis;")
     elsif gamen_kind == "kigyo"
       ActiveRecord::Base.connection.execute("TRUNCATE TABLE kigyo_masters;")
     elsif gamen_kind == "jyoto"
-      #譲渡損益税明細は、2020/2021/2022 の３つのcsvを続けてアップロードするため truncateしない
+      case nendo
+      when "2020" then
+        ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2020s;")
+        p "TRUNCATE TABLE jyoto_eki_meisai2020s"
+      when "2021" then
+        ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2021s;")
+        p "TRUNCATE TABLE jyoto_eki_meisai2021s"
+      when "2022" then
+        ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2022s;")
+        p "TRUNCATE TABLE jyoto_eki_meisai2022s"
+      end
+
       #ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisais;")
     end
     CSV.foreach(file.path, headers: true) do |row|
@@ -30,7 +41,19 @@ module CsvImport extend ActiveSupport::Concern
       
       # 譲渡益明細の場合  
       elsif gamen_kind == "jyoto"
-        jyo_to_eki_meisai = JyotoEkiMeisai.new
+        case nendo
+        when "2020" then
+          jyo_to_eki_meisai = JyotoEkiMeisai2020.new
+          p "JyotoEkiMeisai2020.new"
+        when "2021" then
+          jyo_to_eki_meisai = JyotoEkiMeisai2021.new
+          p "JyotoEkiMeisai2021.new"
+        when "2022" then
+          jyo_to_eki_meisai = JyotoEkiMeisai2022.new
+          p "JyotoEkiMeisai2022.new"
+        end
+
+        #jyo_to_eki_meisai = JyotoEkiMeisai.new
 
         # CSVからデータを取得し、設定する
         jyo_to_eki_meisai.attributes = row.to_hash.slice(*updatable_attributes_jyoto)

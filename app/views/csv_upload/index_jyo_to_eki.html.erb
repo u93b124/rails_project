@@ -2,7 +2,11 @@
 <h1>譲渡益明細アップロード</h1>
 
 <%= form_with url: "/csv_upload" do |form| %>
-　<%= form.hidden_field :gamen_kind, :value => "jyoto" %>
+
+  <%= form.select :nendo, [["2020年", "2020"], ["2021年", "2021"], ["2022年", "2022"]], include_blank: "選択して下さい" %>
+  <br><br>
+
+  <%= form.hidden_field :gamen_kind, :value => "jyoto" %>
   <%= form.file_field :file, accept: '.csv' %>
   <%= form.submit "アップロード" %>
 
