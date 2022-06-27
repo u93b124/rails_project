@@ -128,7 +128,7 @@
   <BR>
   ＜サンプル画面＞  
   <p>
-  <a href="sample_image.png"><img src="sample_image.png" alt="サンプル画面" width="50%" height="50%" target="_blank" /></a>
+  <a href="sample_image.png" target="_blank"><img src="sample_image.png" alt="サンプル画面" width="50%" height="50%" /></a>
   </p> 
   <BR>
 
