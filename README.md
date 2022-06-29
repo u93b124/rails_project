@@ -126,10 +126,10 @@
 
 
   <BR>
-  ＜サンプル画面＞  
-  <p>
-[![サンプルイメージ](sample_image.png)](sample_image.png){:target="_blank"}
-  </p>
+  ＜サンプル画面＞<BR>  
+  <a href="sample_image.png" target="_blank">
+  <img src="sample_image.png" alt="サンプル画面" width="50%" height="50%" /></a>
+  
   <BR>
 
 以上
