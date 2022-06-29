@@ -37,9 +37,9 @@
 # [プログラム仕様]    
 　　*rails_project 配下の各ディレクトリ構成* 
    - 【app/controllers】
-     - csv_upload_controller.rb CSVアップロード画面コントローラ
-     - home_controller.rb  TOPメニュー画面コントローラ
-     - joto_eki_syukei_controller.rb  譲渡益修正画面コントローラ
+     - csv_upload_controller.rb　　　　⇒　CSVアップロード画面コントローラ
+     - home_controller.rb　　　　　　　⇒　TOPメニュー画面コントローラ
+     - joto_eki_syukei_controller.rb　⇒　譲渡益修正画面コントローラ
 
    - 【app/models】
      - jyoto_eki_meisai2020.rb
@@ -47,42 +47,42 @@
      - jyoto_eki_meisai2022.rb    
       2020年～2022年のＣＳＶデータ格納テーブル (2023年以降は追加要)  
      - jyoto_eki_syukei.rb  
-      集計用ＳＱＬの実行モデル
+      　集計用ＳＱＬの実行モデル
 
    - 【app/views】
-     - csv_upload/index_jyo_to_eki.html.erb CSVアップロード画面ビュー
-     - home/index.html.erb  TOPメニュー画面ビュー
-     - jyoto_eki_syukei/index.html.erb 譲渡益集計画面ビュー
+     - csv_upload/index_jyo_to_eki.html.erb　⇒　CSVアップロード画面ビュー
+     - home/index.html.erb　　　　　　　　　　⇒　TOPメニュー画面ビュー
+     - jyoto_eki_syukei/index.html.erb　　　　⇒　譲渡益集計画面ビュー
 
    - 【lib】
-     - csv_import.rb CSVアップロード処理(DB更新ロジック)
+     - csv_import.rb　⇒　CSVアップロード処理(DB更新ロジック)
 
 
 # ■ データベース 初期設定 手順
-   1. 下記 LinuxコマンドにてMySQLコンソールを起動する
+   1. 下記 LinuxコマンドにてMySQLコンソールを起動する  
       mysql -u root -proot development 
 
    2. 下記、SQLを実行し jyoto_eki_meisai2020s テーブルを作成する
 
 
-　　`CREATE TABLE `jyoto_eki_meisai2020s` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `code` int DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `torikesi` varchar(255) DEFAULT NULL,
-  `yakujo_bi` date DEFAULT NULL,
-  `count` int DEFAULT NULL,
-  `torihiki` varchar(255) DEFAULT NULL,
-  `ukewatasi` date DEFAULT NULL,
-  `baikyaku` int DEFAULT NULL,
-  `hiyo` int DEFAULT NULL,
-  `syutoku_bi` date DEFAULT NULL,
-  `sinki_gaku` int DEFAULT NULL,
-  `son_eki_gaku` int DEFAULT NULL,
-  `chiho` int DEFAULT NULL,
-  `created_at` datetime(6) NOT NULL,
-  `updated_at` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`)
+　　`CREATE TABLE `jyoto_eki_meisai2020s` (  
+  `id` bigint NOT NULL AUTO_INCREMENT,  
+  `code` int DEFAULT NULL,  
+  `name` varchar(255) DEFAULT NULL,  
+  `torikesi` varchar(255) DEFAULT NULL,  
+  `yakujo_bi` date DEFAULT NULL,  
+  `count` int DEFAULT NULL,  
+  `torihiki` varchar(255) DEFAULT NULL,  
+  `ukewatasi` date DEFAULT NULL,  
+  `baikyaku` int DEFAULT NULL,  
+  `hiyo` int DEFAULT NULL,  
+  `syutoku_bi` date DEFAULT NULL,  
+  `sinki_gaku` int DEFAULT NULL,  
+  `son_eki_gaku` int DEFAULT NULL,  
+  `chiho` int DEFAULT NULL,  
+  `created_at` datetime(6) NOT NULL,  
+  `updated_at` datetime(6) NOT NULL,  
+  PRIMARY KEY (`id`)  
 );`  
 
   3. jyoto_eki_meisai2021s , jyoto_eki_meisai2022s テーブルも上記 同様に作成する  
@@ -128,8 +128,8 @@
   <BR>
   ＜サンプル画面＞  
   <p>
-  <a href="sample_image.png" target="_blank"><img src="sample_image.png" alt="サンプル画面" width="50%" height="50%" /></a>
-  </p> 
+[![サンプルイメージ](sample_image.png)](sample_image.png){:target="_blank"}
+  </p>
   <BR>
 
 以上
