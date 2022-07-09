@@ -19,10 +19,10 @@ module CsvImport extend ActiveSupport::Concern
         ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2022s;")
         p "TRUNCATE TABLE jyoto_eki_meisai2022s"
       end
-
-      #ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisais;")
     end
-    CSV.foreach(file.path, headers: true) do |row|
+
+    # CSVファイルを UTF8に変換して読み込む
+    CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
       # 取引履歴の場合
       if gamen_kind == "tori"
         torihiki_rireki = TorihikiRireki.new
@@ -52,8 +52,6 @@ module CsvImport extend ActiveSupport::Concern
           jyo_to_eki_meisai = JyotoEkiMeisai2022.new
           p "JyotoEkiMeisai2022.new"
         end
-
-        #jyo_to_eki_meisai = JyotoEkiMeisai.new
 
         # CSVからデータを取得し、設定する
         jyo_to_eki_meisai.attributes = row.to_hash.slice(*updatable_attributes_jyoto)
