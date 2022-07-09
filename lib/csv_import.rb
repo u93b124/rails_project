@@ -2,52 +2,67 @@ module CsvImport extend ActiveSupport::Concern
 
   #引数：file,gamen_kind(取引履歴:tori／企業マスタ:kigyo) , :nendo（年度）
   def import(file,gamen_kind, nendo)
+
     # インポート前に古いデータを一旦削除する
-    if gamen_kind == "tori"
-      ActiveRecord::Base.connection.execute("TRUNCATE TABLE torihiki_rirekis;")
-    elsif gamen_kind == "kigyo"
-      ActiveRecord::Base.connection.execute("TRUNCATE TABLE kigyo_masters;")
-    elsif gamen_kind == "jyoto"
-      case nendo
-      when "2020" then
-        ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2020s;")
-        p "TRUNCATE TABLE jyoto_eki_meisai2020s"
-      when "2021" then
-        ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2021s;")
-        p "TRUNCATE TABLE jyoto_eki_meisai2021s"
-      when "2022" then
-        ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2022s;")
-        p "TRUNCATE TABLE jyoto_eki_meisai2022s"
-      end
+    case nendo
+    when "2020" then
+      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2020s;")
+    when "2021" then
+      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2021s;")
+    when "2022" then
+      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2022s;")
+    end
+      
+    # CSVファイルを UTF8に変換して読み込む(lineno: 処理中の行番号1～)
+    csv_contents = CSV.read(file.path, encoding: 'Shift_JIS:UTF-8')
+
+    # CSVの最初の21行はコメントなので読み飛ばす
+    21.times do
+      csv_contents.shift
     end
 
-    # CSVファイルを UTF8に変換して読み込む
-    CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
-      # 譲渡益明細の場合  
-      if gamen_kind == "jyoto"
+    # 22行目からのCSV行を１行ずつ [データ,行番号] を取得する
+    csv_contents.each.with_index do |row, lineno|
+
+      begin
+        # 処理対象でない行(CSVのA列がブランクまたは"税,額"が含まれるもの)を読み飛ばす
+        next if row[0].blank?
+        next if ( row[0].include?("税") || row[0].include?("額") )
+
+      
+        # 対象ＣＳＶ毎に格納テーブルを分けている
         case nendo
-        when "2020" then
-          jyo_to_eki_meisai = JyotoEkiMeisai2020.new
-          p "JyotoEkiMeisai2020.new"
-        when "2021" then
-          jyo_to_eki_meisai = JyotoEkiMeisai2021.new
-          p "JyotoEkiMeisai2021.new"
-        when "2022" then
-          jyo_to_eki_meisai = JyotoEkiMeisai2022.new
-          p "JyotoEkiMeisai2022.new"
+          when "2020" then
+            jyo_to_eki_meisai = JyotoEkiMeisai2020.new
+          when "2021" then
+            jyo_to_eki_meisai = JyotoEkiMeisai2021.new
+          when "2022" then
+            jyo_to_eki_meisai = JyotoEkiMeisai2022.new
         end
 
-        # CSVからデータを取得し、設定する
-        jyo_to_eki_meisai.attributes = row.to_hash.slice(*updatable_attributes_jyoto)
+        # JyotoEkiMeisaiテーブルの各項目にcsv値[0]～[12]をセット
+        jyo_to_eki_meisai.code         = row[0]
+        jyo_to_eki_meisai.name         = row[1]
+        jyo_to_eki_meisai.torihiki     = row[2]
+        jyo_to_eki_meisai.yakujo_bi    = row[3]
+        jyo_to_eki_meisai.count        = row[4]
+        jyo_to_eki_meisai.torihiki     = row[5]
+        jyo_to_eki_meisai.ukewatasi    = row[6]
+        jyo_to_eki_meisai.baikyaku     = row[7]
+        jyo_to_eki_meisai.hiyo         = row[8]
+        jyo_to_eki_meisai.syutoku_bi   = row[9]
+        jyo_to_eki_meisai.sinki_gaku   = row[10]
+        jyo_to_eki_meisai.son_eki_gaku = row[11]
+        jyo_to_eki_meisai.chiho        = row[12]
+        
+        # レコードの INSERT
         jyo_to_eki_meisai.save
-      end 
-    end
-  end
 
-  # 更新を許可するカラムを定義（譲渡益明細）
-  def updatable_attributes_jyoto
-    ["code","name","torikesi","yakujo_bi","count","torihiki",
-      "ukewatasi","baikyaku","hiyo","syutoku_bi","sinki_gaku","son_eki_gaku","chiho"]
-  end
+      rescue
+        raise $!, "#{lineno} 行目を処理中にエラーが発生しました。\n#{$!.message}", $!.backtrace
+      end
 
-end
+    end # csv_contentsの終わり
+
+  end  # def importの終わり
+end # module の終わり
