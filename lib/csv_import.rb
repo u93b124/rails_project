@@ -23,24 +23,8 @@ module CsvImport extend ActiveSupport::Concern
 
     # CSVファイルを UTF8に変換して読み込む
     CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
-      # 取引履歴の場合
-      if gamen_kind == "tori"
-        torihiki_rireki = TorihikiRireki.new
-
-        # CSVからデータを取得し、設定する
-        torihiki_rireki.attributes = row.to_hash.slice(*updatable_attributes_tori)
-        torihiki_rireki.save
-
-      # 企業マスタの場合  
-      elsif gamen_kind == "kigyo"
-        kigyo_master = KigyoMaster.new
-
-        # CSVからデータを取得し、設定する
-        kigyo_master.attributes = row.to_hash.slice(*updatable_attributes_kigyo)
-        kigyo_master.save
-      
       # 譲渡益明細の場合  
-      elsif gamen_kind == "jyoto"
+      if gamen_kind == "jyoto"
         case nendo
         when "2020" then
           jyo_to_eki_meisai = JyotoEkiMeisai2020.new
@@ -58,17 +42,6 @@ module CsvImport extend ActiveSupport::Concern
         jyo_to_eki_meisai.save
       end 
     end
-  end
-
-  # 更新を許可するカラムを定義（取引履歴）
-  def updatable_attributes_tori
-    ["yakujobi","meigara","code","market","torihiki","kigen","azukari","kazei",
-      "count","tanka","tesuu","zeigaku","ukewatasi","kingaku"]
-  end
-
-  # 更新を許可するカラムを定義（企業マスタ）
-  def updatable_attributes_kigyo
-    ["code", "name", "market", "kind"]
   end
 
   # 更新を許可するカラムを定義（譲渡益明細）
