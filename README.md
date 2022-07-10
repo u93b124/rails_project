@@ -59,39 +59,20 @@
 
 
 # ■ データベース 初期設定 手順
-   1. 下記 LinuxコマンドにてMySQLコンソールを起動する  
-      mysql -u root -proot development 
+   1. config/database.yml の [username]、[password] をMySQLのユーザに合わせ修正する  
+   2. cd [Rails.root] ディレクトリへ移動する
 
-   2. 下記、SQLを実行し jyoto_eki_meisai2020s テーブルを作成する
+   3. rake db:crate  
+   ⇒ developmentデータベースの作成
+   
+   4. rake db:migrate  
+   ⇒ jyoto_eki_meisai2020s、jyoto_eki_meisai2021s、jyoto_eki_meisai2022s テーブルの作成
 
-
-　　`CREATE TABLE `jyoto_eki_meisai2020s` (  
-  `id` bigint NOT NULL AUTO_INCREMENT,  
-  `code` int DEFAULT NULL,  
-  `name` varchar(255) DEFAULT NULL,  
-  `torikesi` varchar(255) DEFAULT NULL,  
-  `yakujo_bi` date DEFAULT NULL,  
-  `count` int DEFAULT NULL,  
-  `torihiki` varchar(255) DEFAULT NULL,  
-  `ukewatasi` date DEFAULT NULL,  
-  `baikyaku` int DEFAULT NULL,  
-  `hiyo` int DEFAULT NULL,  
-  `syutoku_bi` date DEFAULT NULL,  
-  `sinki_gaku` int DEFAULT NULL,  
-  `son_eki_gaku` int DEFAULT NULL,  
-  `chiho` int DEFAULT NULL,  
-  `created_at` datetime(6) NOT NULL,  
-  `updated_at` datetime(6) NOT NULL,  
-  PRIMARY KEY (`id`)  
-);`  
-
-  3. jyoto_eki_meisai2021s , jyoto_eki_meisai2022s テーブルも上記 同様に作成する  
-  (上記 CREATE TABLE文の TABLE NAME部分を修正し実行する)  
+   ※(ToDo) 将来、2023年度のcsvファイルを格納するテーブル作成要。仕様の全面的な見直しも含め検討する。
 
 # ■ ＣＳＶ集計の画面操作 手順  
 
   1. （・・/rails_projec） ディレクトリで、下記 Linuxコマンドで railsサーバ を起動する  
-
   `rails s -b 0.0.0.0`  
 
   2. ブラウザにてローカルWEBサーバへアクセスする  
@@ -101,11 +82,8 @@
       - プルダウンメニューより、対象年を選択する  
       - CSVファイルを選択し、アップロードボタンを押下  
 
-
       2.2. ホームリンク を選択 ⇒ 譲渡益集計リンクを選択し、集計画面を参照する  
 　　　(画面上部リンクから 2020/2021/2022年 を切り替え可)  
-
-
 
 
   <BR>
