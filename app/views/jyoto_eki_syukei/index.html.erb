@@ -4,15 +4,25 @@
 <h3>（受渡日：<font color = "red"><%= @nen %></font>年01月01日～
 <font color = "red"><%= @nen %></font>年12月31日）</h3><br>
 
-<table border="1">
-  <% i = 0 %>
-  <% @total_soneki.each do |total_soneki| %>
-    <% i = i + 1 %>
-    <% if i == 1 %><th>利益計</th><% end %>
-    <% if i == 2 %><th>損失計</th><% end %>
-    <% if i == 3 %><th>全体合計</th><% end %>
-    <td><%= number_with_delimiter(total_soneki.son_eki_gaku) %></td>
+<% sum_minus = 0 %>
+<% sum_plus = 0 %>
+<% if @jyoto_eki_syukeis != nil %>
+  <% @jyoto_eki_syukeis.each do |jyoto_eki| %>
+    <% if jyoto_eki.son_eki_gaku < 0 %>
+      <% sum_minus = sum_minus + jyoto_eki.son_eki_gaku %>
+    <% else %>
+       <% sum_plus = sum_plus + jyoto_eki.son_eki_gaku %>
+    <% end %>
   <% end %>
+<% end %>
+
+<table border="1">
+    <tr><th>利益計</th><th>損失計</th><th>全体合計</th></tr>
+    <tr>
+      <td><%= number_with_delimiter(sum_plus) %></td>
+      <td><font color="red"><%= number_with_delimiter(sum_minus) %></font></td>
+      <td><%= number_with_delimiter(sum_minus + sum_plus) %></td>
+    </tr>
 </table>
 <br>
 <%= link_to "2020年", jyoto_eki_syukei_path(nen: "2020") %> 
