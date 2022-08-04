@@ -34,6 +34,10 @@
       <th>順位</th>
       <th>コード</th>
       <th>会社名</th>
+      <th>株数</th>
+      <th>買付株価</th>
+      <th>売却単価</th>
+      <th>騰落率</th>
       <th>損益額</th>
       <th>買付日</th>
       <th>売却日</th>
@@ -49,7 +53,26 @@
         <td><%= i %></td>
         <td><%= jyoto_eki.code %></td>
         <td><%= jyoto_eki.name %></td>
-        <td>
+        <td align="right"><%= number_with_delimiter(jyoto_eki.kabu_su) %></td>
+        <td align="right">
+          <% kai_tanka = jyoto_eki.konyu_gaku / jyoto_eki.kabu_su %>
+          <%= number_with_delimiter(kai_tanka) %>
+        </td>
+        <td align="right">
+          <% uri_tanka = (jyoto_eki.konyu_gaku + jyoto_eki.son_eki_gaku) / jyoto_eki.kabu_su %>
+          <%= number_with_delimiter(uri_tanka) %>
+        </td>
+        <td align="right">
+          <% tou_raku_ritu = ( (uri_tanka.to_f / kai_tanka.to_f) -1 ) * 100  %>
+          <% if tou_raku_ritu < 0 %>
+            <font color = "red">
+          <% end %>  
+          <%= sprintf("%.2f", tou_raku_ritu) %>
+          <% if tou_raku_ritu < 0 %>
+             </font>
+          <% end %> 
+        </td>
+        <td align="right">
           <% if jyoto_eki.son_eki_gaku < 0 %>
             <font color = "red">
           <% end %>
