@@ -16,7 +16,7 @@ class JyotoEkiSyukei
 
     # SQL
     query = "SELECT code, MAX(name) as name, SUM(son_eki_gaku) as son_eki_gaku, " 
-    query += "MIN(yakujo_bi) AS kaituke_bi, MAX(yakujo_bi) AS baikyaku_bi, "
+    query += "MIN(syutoku_bi) AS kaituke_bi, MAX(yakujo_bi) AS baikyaku_bi, "
     query += "SUM(count) AS kabu_su, SUM(sinki_gaku) AS konyu_gaku "
     query += "FROM " + table_name
     query += "WHERE ukewatasi BETWEEN ? and ?"
