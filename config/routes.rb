@@ -15,9 +15,8 @@ Rails.application.routes.draw do
   # 譲渡益集計 画面
   get 'jyoto_eki_syukei', to: 'jyoto_eki_syukei#index'
 
-  # ユーザ画面
-  get 'users', to: 'users#index'
-  get 'users/new', to: 'users#new'
+  # 配当益集計 画面
+  get 'haito_eki_syukei', to: 'haito_eki_syukei#index'
 
   # CSVアップロード（更新処理）
   post "/csv_upload"=> "csv_upload#csv_import" 
