@@ -1,4 +1,5 @@
 module CsvImport extend ActiveSupport::Concern
+  UPLOAD_NEN =  [["2020年", "2020"], ["2021年", "2021"], ["2022年", "2022"], ["2023年", "2023"]]
 
   #引数：file,gamen_kind(取引履歴:tori／企業マスタ:kigyo) , :nendo（年度）
   def import(file,gamen_kind, nendo)
@@ -38,6 +39,8 @@ module CsvImport extend ActiveSupport::Concern
             jyo_to_eki_meisai = JyotoEkiMeisai2021.new
           when "2022" then
             jyo_to_eki_meisai = JyotoEkiMeisai2022.new
+          when "2023" then
+            jyo_to_eki_meisai = JyotoEkiMeisai2023.new
         end
 
         # JyotoEkiMeisaiテーブルの各項目にcsv値[0]～[12]をセット
