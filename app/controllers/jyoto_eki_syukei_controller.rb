@@ -32,14 +32,6 @@ class JyotoEkiSyukeiController < ApplicationController
         sum_tou_raku_ritu_plus = sum_tou_raku_ritu_plus + tou_raku_ritu  # 平均利益計算用_合計 
       end
 
-
-
-
-      # if tou_raku_ritu < 0 
-      #   sum_tou_raku_ritu_minus = sum_tou_raku_ritu_minus + tou_raku_ritu
-      # else 
-      #   sum_tou_raku_ritu_plus = sum_tou_raku_ritu_plus + tou_raku_ritu 
-      # end 
     end
     
     @avg_loss = sum_tou_raku_ritu_minus.to_f / @count_minus 
