@@ -12,8 +12,11 @@ module CsvImport extend ActiveSupport::Concern
       ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2021s;")
     when "2022" then
       ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2022s;")
+    when "2023" then
+      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2023s;")
     end
       
+
     # CSVファイルを UTF8に変換して読み込む(lineno: 処理中の行番号1～)
     csv_contents = CSV.read(file.path, encoding: 'Shift_JIS:UTF-8')
 
