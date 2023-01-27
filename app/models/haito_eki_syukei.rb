@@ -22,7 +22,7 @@ class HaitoEkiSyukei
     query += "SUM(count) AS kabu_su, SUM(sinki_gaku) AS konyu_gaku "
     query += "FROM " + table_name
     query += "WHERE ukewatasi BETWEEN ? and ?"
-    query += "AND torihiki = '株式配当金' "
+    query += "AND ( torihiki = '株式配当金' OR torihiki = '信用配当金')"
     query += "GROUP BY code "
     query += "ORDER BY son_eki_gaku DESC "
 
