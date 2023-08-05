@@ -81,7 +81,7 @@
         </td>
         <td><%= jyoto_eki.kaituke_bi %></td>
         <td><%= jyoto_eki.baikyaku_bi %></td>
-        <td><%= MeigaraMemo.get_memo(jyoto_eki.code, @nen) %></td>
+        <td><pre><%= MeigaraMemo.get_memo(jyoto_eki.code, @nen) %></pre></td>
       </tr>
     <% end %>
   </div>      
