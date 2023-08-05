@@ -1,0 +1,30 @@
+<h1>銘柄メモ（年度：<font color = "red"><%= @nen %></font>）</h1>
+<%= link_to "2020年", meigara_memos_path(nendo: "2020") %> 
+<%= link_to "2021年", meigara_memos_path(nendo: "2021") %> 
+<%= link_to "2022年", meigara_memos_path(nendo: "2022") %> 
+<%= link_to "2023年", meigara_memos_path(nendo: "2023") %> 
+<br><br>
+<table border="1">
+  <thead>
+    <tr>
+      <th>コード</th>
+      <th>メモ</th>
+    </tr>
+  </thead>
+
+<% if @meigara_memos != nil %>
+  <tbody>
+    <% @meigara_memos.each do |item| %>
+      <tr>
+        <td><%= item.code %></td>
+        <td><%= item.memo %></td>
+        <td><%= link_to '表示', meigara_memo_path(item, nendo: @nen) %></td>
+        <td><%= link_to '編集', edit_meigara_memo_path(item, nendo: @nen) %></td>  
+      </tr>
+    <% end %>
+  </tbody>
+<% end %>
+
+</table>
+<%= link_to '銘柄メモを作成', new_meigara_memo_path(nendo: @nen) %>
+

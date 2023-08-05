@@ -1,0 +1,63 @@
+                                  Prefix Verb   URI Pattern                                                                                       Controller#Action
+                       jyoto_eki_meisais GET    /jyoto_eki_meisais(.:format)                                                                      jyoto_eki_meisais#index
+                                         POST   /jyoto_eki_meisais(.:format)                                                                      jyoto_eki_meisais#create
+                    new_jyoto_eki_meisai GET    /jyoto_eki_meisais/new(.:format)                                                                  jyoto_eki_meisais#new
+                   edit_jyoto_eki_meisai GET    /jyoto_eki_meisais/:id/edit(.:format)                                                             jyoto_eki_meisais#edit
+                        jyoto_eki_meisai GET    /jyoto_eki_meisais/:id(.:format)                                                                  jyoto_eki_meisais#show
+                                         PATCH  /jyoto_eki_meisais/:id(.:format)                                                                  jyoto_eki_meisais#update
+                                         PUT    /jyoto_eki_meisais/:id(.:format)                                                                  jyoto_eki_meisais#update
+                                         DELETE /jyoto_eki_meisais/:id(.:format)                                                                  jyoto_eki_meisais#destroy
+                        torihiki_rirekis GET    /torihiki_rirekis(.:format)                                                                       torihiki_rirekis#index
+                                         POST   /torihiki_rirekis(.:format)                                                                       torihiki_rirekis#create
+                     new_torihiki_rireki GET    /torihiki_rirekis/new(.:format)                                                                   torihiki_rirekis#new
+                    edit_torihiki_rireki GET    /torihiki_rirekis/:id/edit(.:format)                                                              torihiki_rirekis#edit
+                         torihiki_rireki GET    /torihiki_rirekis/:id(.:format)                                                                   torihiki_rirekis#show
+                                         PATCH  /torihiki_rirekis/:id(.:format)                                                                   torihiki_rirekis#update
+                                         PUT    /torihiki_rirekis/:id(.:format)                                                                   torihiki_rirekis#update
+                                         DELETE /torihiki_rirekis/:id(.:format)                                                                   torihiki_rirekis#destroy
+                           meigara_memos GET    /meigara_memos(.:format)                                                                          meigara_memos#index
+                                         POST   /meigara_memos(.:format)                                                                          meigara_memos#create
+                        new_meigara_memo GET    /meigara_memos/new(.:format)                                                                      meigara_memos#new
+                       edit_meigara_memo GET    /meigara_memos/:id/edit(.:format)                                                                 meigara_memos#edit
+                            meigara_memo GET    /meigara_memos/:id(.:format)                                                                      meigara_memos#show
+                                         PATCH  /meigara_memos/:id(.:format)                                                                      meigara_memos#update
+                                         PUT    /meigara_memos/:id(.:format)                                                                      meigara_memos#update
+                                         DELETE /meigara_memos/:id(.:format)                                                                      meigara_memos#destroy
+                        csv_upload_index GET    /csv_upload/index(.:format)                                                                       csv_upload#index
+               csv_upload_index_torihiki GET    /csv_upload/index_torihiki(.:format)                                                              csv_upload#index_torihiki
+             csv_upload_index_jyo_to_eki GET    /csv_upload/index_jyo_to_eki(.:format)                                                            csv_upload#index_jyo_to_eki
+                                 son_eki GET    /son_eki(.:format)                                                                                son_eki#index
+                        jyoto_eki_syukei GET    /jyoto_eki_syukei(.:format)                                                                       jyoto_eki_syukei#index
+                        haito_eki_syukei GET    /haito_eki_syukei(.:format)                                                                       haito_eki_syukei#index
+                              csv_upload POST   /csv_upload(.:format)                                                                             csv_upload#csv_import
+                              home_index GET    /home/index(.:format)                                                                             home#index
+        turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
+        turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
+       turbo_refresh_historical_location GET    /refresh_historical_location(.:format)                                                            turbo/native/navigation#refresh
+           rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
+              rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create
+           rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                           action_mailbox/ingresses/sendgrid/inbound_emails#create
+     rails_mandrill_inbound_health_check GET    /rails/action_mailbox/mandrill/inbound_emails(.:format)                                           action_mailbox/ingresses/mandrill/inbound_emails#health_check
+           rails_mandrill_inbound_emails POST   /rails/action_mailbox/mandrill/inbound_emails(.:format)                                           action_mailbox/ingresses/mandrill/inbound_emails#create
+            rails_mailgun_inbound_emails POST   /rails/action_mailbox/mailgun/inbound_emails/mime(.:format)                                       action_mailbox/ingresses/mailgun/inbound_emails#create
+          rails_conductor_inbound_emails GET    /rails/conductor/action_mailbox/inbound_emails(.:format)                                          rails/conductor/action_mailbox/inbound_emails#index
+                                         POST   /rails/conductor/action_mailbox/inbound_emails(.:format)                                          rails/conductor/action_mailbox/inbound_emails#create
+       new_rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/new(.:format)                                      rails/conductor/action_mailbox/inbound_emails#new
+      edit_rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/:id/edit(.:format)                                 rails/conductor/action_mailbox/inbound_emails#edit
+           rails_conductor_inbound_email GET    /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#show
+                                         PATCH  /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#update
+                                         PUT    /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#update
+                                         DELETE /rails/conductor/action_mailbox/inbound_emails/:id(.:format)                                      rails/conductor/action_mailbox/inbound_emails#destroy
+new_rails_conductor_inbound_email_source GET    /rails/conductor/action_mailbox/inbound_emails/sources/new(.:format)                              rails/conductor/action_mailbox/inbound_emails/sources#new
+   rails_conductor_inbound_email_sources POST   /rails/conductor/action_mailbox/inbound_emails/sources(.:format)                                  rails/conductor/action_mailbox/inbound_emails/sources#create
+   rails_conductor_inbound_email_reroute POST   /rails/conductor/action_mailbox/:inbound_email_id/reroute(.:format)                               rails/conductor/action_mailbox/reroutes#create
+rails_conductor_inbound_email_incinerate POST   /rails/conductor/action_mailbox/:inbound_email_id/incinerate(.:format)                            rails/conductor/action_mailbox/incinerates#create
+                      rails_service_blob GET    /rails/active_storage/blobs/redirect/:signed_id/*filename(.:format)                               active_storage/blobs/redirect#show
+                rails_service_blob_proxy GET    /rails/active_storage/blobs/proxy/:signed_id/*filename(.:format)                                  active_storage/blobs/proxy#show
+                                         GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                                        active_storage/blobs/redirect#show
+               rails_blob_representation GET    /rails/active_storage/representations/redirect/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations/redirect#show
+         rails_blob_representation_proxy GET    /rails/active_storage/representations/proxy/:signed_blob_id/:variation_key/*filename(.:format)    active_storage/representations/proxy#show
+                                         GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format)          active_storage/representations/redirect#show
+                      rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                                       active_storage/disk#show
+               update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                               active_storage/disk#update
+                    rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                                    active_storage/direct_uploads#create
