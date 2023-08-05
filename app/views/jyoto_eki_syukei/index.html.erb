@@ -38,6 +38,7 @@
       <th>損益額</th>
       <th>買付日</th>
       <th>売却日</th>
+      <th>メモ</th>
     </tr>
     </thead>
 
@@ -80,6 +81,7 @@
         </td>
         <td><%= jyoto_eki.kaituke_bi %></td>
         <td><%= jyoto_eki.baikyaku_bi %></td>
+        <td><%= MeigaraMemo.get_memo(jyoto_eki.code, @nen) %></td>
       </tr>
     <% end %>
   </div>      

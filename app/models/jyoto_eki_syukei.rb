@@ -17,7 +17,7 @@ class JyotoEkiSyukei
     end
 
     # SQL
-    query = "SELECT code, MAX(name) as name, SUM(son_eki_gaku) as son_eki_gaku, " 
+    query = "SELECT code, MAX(LEFT(name, 20)) as name, SUM(son_eki_gaku) as son_eki_gaku, " 
     query += "MIN(syutoku_bi) AS kaituke_bi, MAX(ukewatasi) AS baikyaku_bi, "
     query += "SUM(count) AS kabu_su, SUM(sinki_gaku) AS konyu_gaku "
     query += "FROM " + table_name
@@ -31,5 +31,4 @@ class JyotoEkiSyukei
     # 該当の証券コード毎に「株式現物買」の金額を取得する
     ret = JyotoEkiMeisai2020.find_by_sql([query, from_date, to_date])
   end
-
 end
