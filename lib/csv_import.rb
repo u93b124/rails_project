@@ -1,5 +1,6 @@
 module CsvImport extend ActiveSupport::Concern
-  UPLOAD_NEN =  [["2020年", "2020"], ["2021年", "2021"], ["2022年", "2022"], ["2023年", "2023"]]
+  UPLOAD_NEN =  [["2020年", "2020"], ["2021年", "2021"], 
+                ["2022年", "2022"], ["2023年", "2023"], ["2024年", "2024"]]
 
   #引数：file,gamen_kind(取引履歴:tori／企業マスタ:kigyo) , :nendo（年度）
   def import(file,gamen_kind, nendo)
@@ -14,8 +15,10 @@ module CsvImport extend ActiveSupport::Concern
       ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2022s;")
     when "2023" then
       ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2023s;")
+    when "2024" then
+      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2024s;")
     end
-      
+
 
     # CSVファイルを UTF8に変換して読み込む(lineno: 処理中の行番号1～)
     csv_contents = CSV.read(file.path, encoding: 'Shift_JIS:UTF-8')
@@ -33,7 +36,7 @@ module CsvImport extend ActiveSupport::Concern
         next if row[0].blank?
         next if ( row[0].include?("税") || row[0].include?("額") )
 
-      
+
         # 対象ＣＳＶ毎に格納テーブルを分けている
         case nendo
           when "2020" then
@@ -44,6 +47,8 @@ module CsvImport extend ActiveSupport::Concern
             jyo_to_eki_meisai = JyotoEkiMeisai2022.new
           when "2023" then
             jyo_to_eki_meisai = JyotoEkiMeisai2023.new
+          when "2024" then
+            jyo_to_eki_meisai = JyotoEkiMeisai2024.new
         end
 
         # JyotoEkiMeisaiテーブルの各項目にcsv値[0]～[12]をセット
@@ -60,7 +65,7 @@ module CsvImport extend ActiveSupport::Concern
         jyo_to_eki_meisai.sinki_gaku   = row[10]
         jyo_to_eki_meisai.son_eki_gaku = row[11]
         jyo_to_eki_meisai.chiho        = row[12]
-        
+
         # レコードの INSERT
         jyo_to_eki_meisai.save
 
