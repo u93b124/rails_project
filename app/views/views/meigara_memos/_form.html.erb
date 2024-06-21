@@ -1,0 +1,29 @@
+<%= form_with(model: meigara_memo) do |form| %>
+  <% if meigara_memo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(meigara_memo.errors.count, "error") %> prohibited this meigara_memo from being saved:</h2>
+
+      <ul>
+        <% meigara_memo.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.number_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :memo %>
+    <%= form.text_area :memo , cols: 100 , rows: 10 %>
+  </div>
+
+  <%= form.hidden_field :nendo, :value => @nen %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

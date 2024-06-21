@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SBI譲渡益集計</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <div class ="diary_header">
+      <a href="http://192.168.56.2:3000/home/index">ホーム</a>
+    </div>
+    <div class ="diary_body">
+      <%= yield %> 
+    </div>
+
+    <div class="diary_fotter">
+      <fotter>フッター</footer>
+    </div> 
+  </body>
+</html>

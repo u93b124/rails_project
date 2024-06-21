@@ -1,0 +1,93 @@
+<h1>譲渡益集計</h1>
+<h3>（受渡日：<font color = "red"><%= @nen %></font>年01月01日～
+<font color = "red"><%= @nen %></font>年12月31日）</h3><br>
+
+<table border="1">
+    <tr>
+      <th>利益計</th><th>損失計</th><th>全体合計</th>
+      <th>勝ち数</th><th>負け数</th><th>勝率</th>
+      <th>平均利益</th><th>平均損失</th>
+    </tr>
+    
+    <tr>
+      <td><%= number_with_delimiter(@sum_plus) %></td>
+      <td><font color="red"><%= number_with_delimiter(@sum_minus) %></font></td>
+      <td><%= number_with_delimiter(@sum_minus + @sum_plus) %></td>
+      <td><%= @count_plus %></td>
+      <td><font color="red"><%= @count_minus %></font></td>
+      <td><%= @win_rate.round(1) %> %</td>
+      <td><%= @avg_profit.round(2) %> %</td>
+      <td><%= @avg_loss.round(2) %> %</td>
+    </tr>
+</table>
+<br>
+<%= link_to "2020年", jyoto_eki_syukei_path(nen: "2020") %> 
+<%= link_to "2021年", jyoto_eki_syukei_path(nen: "2021") %> 
+<%= link_to "2022年", jyoto_eki_syukei_path(nen: "2022") %> 
+<%= link_to "2023年", jyoto_eki_syukei_path(nen: "2023") %> 
+<%= link_to "2024年", jyoto_eki_syukei_path(nen: "2024") %> 
+<table border="1">
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>コード</th>
+      <th>会社名</th>
+      <th>株数</th>
+      <th>買付株価</th>
+      <th>売却単価</th>
+      <th>騰落率</th>
+      <th>損益額</th>
+      <th>買付日</th>
+      <th>売却日</th>
+      <th>メモ</th>
+    </tr>
+    </thead>
+
+<% if @jyoto_eki_syukeis != nil %>
+  <div id="son_ekis">
+    <% i = 0 %>
+    <% @jyoto_eki_syukeis.each do |jyoto_eki| %>
+      <tr>
+        <% i = i + 1 %>
+        <td><%= i %></td>
+        <td><%= jyoto_eki.code %></td>
+        <td><%= jyoto_eki.name %></td>
+        <td align="right"><%= number_with_delimiter(jyoto_eki.kabu_su) %></td>
+        <td align="right">
+          <% kai_tanka = jyoto_eki.konyu_gaku / jyoto_eki.kabu_su %>
+          <%= number_with_delimiter(kai_tanka) %>
+        </td>
+        <td align="right">
+          <% uri_tanka = (jyoto_eki.konyu_gaku + jyoto_eki.son_eki_gaku) / jyoto_eki.kabu_su %>
+          <%= number_with_delimiter(uri_tanka) %>
+        </td>
+        <td align="right">
+          <% tou_raku_ritu = ( (uri_tanka.to_f / kai_tanka.to_f) -1 ) * 100  %>
+          <% if tou_raku_ritu < 0 %>
+            <font color = "red">
+          <% end %>  
+          <%= sprintf("%.2f", tou_raku_ritu) %>
+          <% if tou_raku_ritu < 0 %>
+             </font>
+          <% end %> 
+        </td>
+        <td align="right">
+          <% if jyoto_eki.son_eki_gaku < 0 %>
+            <font color = "red">
+          <% end %>
+          <%= number_with_delimiter(jyoto_eki.son_eki_gaku) %>
+          <% if jyoto_eki.son_eki_gaku < 0 %>
+            </font>
+          <% end %>
+        </td>
+        <td><%= jyoto_eki.kaituke_bi %></td>
+        <td><%= jyoto_eki.baikyaku_bi %></td>
+        <td><pre><%= MeigaraMemo.get_memo(jyoto_eki.code, @nen) %></pre></td>
+      </tr>
+    <% end %>
+  </div>      
+<% end %>
+
+
+</table>
+

@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   # 譲渡益集計 画面
   get 'jyoto_eki_syukei', to: 'jyoto_eki_syukei#index'
 
-  # 銘柄メモ 画面
-  # get 'meigara_memo', to: 'meigara_memo#index'
+  # （月別）譲渡益集計 画面
+  get 'tuki_jyoto_eki_syukei', to: 'tuki_jyoto_eki_syukei#index'
 
   # 配当益集計 画面
   get 'haito_eki_syukei', to: 'haito_eki_syukei#index'

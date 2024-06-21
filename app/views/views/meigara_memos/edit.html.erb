@@ -1,0 +1,6 @@
+<h1>銘柄メモの編集（<%= @nen %>）</h1>
+
+<%= render 'form', meigara_memo: @meigara_memo %>
+
+<%= link_to 'Show', meigara_memo_path(nendo: @nen ) %> |
+<%= link_to 'Back', meigara_memos_path(nendo: @nen ) %>
