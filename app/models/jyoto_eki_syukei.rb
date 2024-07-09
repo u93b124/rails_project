@@ -31,6 +31,6 @@ class JyotoEkiSyukei
     query += "ORDER BY son_eki_gaku DESC "
 
     # 該当の証券コード毎に「株式現物買」の金額を取得する
-    ret = JyotoEkiMeisai2020.find_by_sql([query, from_date, to_date])
+    ret = JyotoEkiMeisai2024.find_by_sql([query, from_date, to_date])
   end
 end

@@ -7,7 +7,6 @@ class JyotoEkiSyukeiController < ApplicationController
 
     # 銘柄毎の損益集計処理の呼び出し
     @jyoto_eki_syukeis = JyotoEkiSyukei.get_soneki(params[:nen])
-
     @sum_plus = 0
     @sum_minus = 0
     @count_plus = 0
@@ -17,11 +16,11 @@ class JyotoEkiSyukeiController < ApplicationController
     sum_tou_raku_ritu_minus = 0
 
     @jyoto_eki_syukeis.each do |jyoto_eki|
-      
+
       kai_tanka = jyoto_eki.konyu_gaku / jyoto_eki.kabu_su
       uri_tanka = (jyoto_eki.konyu_gaku + jyoto_eki.son_eki_gaku) / jyoto_eki.kabu_su
       tou_raku_ritu = ( (uri_tanka.to_f / kai_tanka.to_f) -1 ) * 100
-      
+
       if ( jyoto_eki.son_eki_gaku < 0 ) 
         @sum_minus = @sum_minus + jyoto_eki.son_eki_gaku   # 合計損失額
         @count_minus = @count_minus + 1                    # 負け数
@@ -33,12 +32,11 @@ class JyotoEkiSyukeiController < ApplicationController
       end
 
     end
-    
+
     @avg_loss = sum_tou_raku_ritu_minus.to_f / @count_minus 
     @avg_profit = sum_tou_raku_ritu_plus.to_f / @count_plus
     @win_rate = (@count_plus.to_f / (@count_plus.to_f + @count_minus.to_f))*100
-    
+
   end
 
- 
 end
