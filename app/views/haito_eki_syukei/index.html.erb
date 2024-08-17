@@ -11,9 +11,19 @@
 <% end %>
 
 <table border="1">
-    <tr><th>配当計</th></tr>
+    <tr>
+      <th>配当額</th>
+      <th>課税金額</th>
+      <th>配当利益</th>
+    </tr>
     <tr>
       <td><%= number_with_delimiter(sum_plus) %></td>
+      <td><%= number_with_delimiter((sum_plus*Constants::TAX).floor) %></td>
+      <td>
+        <font color = "red">
+          <%= number_with_delimiter((sum_plus*(1 - Constants::TAX)).floor) %>
+        </font>
+      </td>
     </tr>
 </table>
 <br>
