@@ -12,7 +12,12 @@
 
   <body>
     <div class ="diary_header">
-      <a href="http://192.168.56.2:3000/home/index">ホーム</a>
+      <span class="header_link"><a href="http://192.168.56.2:3000/home/index">ホーム</a></span></span>
+      <span class="header_link"><a href="http://192.168.56.2:3000/csv_upload/index_jyo_to_eki">譲渡益明細アップロード</a></span>
+      <span class="header_link"><a href="http://192.168.56.2:3000/jyoto_eki_syukei?nen=2024">譲渡益明細集計</a></span>
+      <span class="header_link"><a href="http://192.168.56.2:3000/tuki_jyoto_eki_syukei?nen=2024">月別譲渡益</a></span>
+      <span class="header_link"><a href="http://192.168.56.2:3000/haito_eki_syukei?nen=2024">配当金集計</a></span>
+      <span class="header_link"><a href="http://192.168.56.2:3000/meigara_memos?nendo=2024">銘柄メモ</a></span>
     </div>
     <div class ="diary_body">
       <%= yield %> 
@@ -20,6 +25,6 @@
 
     <div class="diary_fotter">
       <fotter>フッター</footer>
-    </div> 
+    </div>
   </body>
 </html>

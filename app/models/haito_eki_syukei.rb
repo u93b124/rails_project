@@ -1,5 +1,5 @@
 class HaitoEkiSyukei 
-    # 譲渡益明細ＤＢから配当益を集計する
+    # 譲渡益明細ＤＢから配当金を集計する
   def self.get_soneki(nen)
     # 日付の組み立て
     from_date = nen + "-01-01"

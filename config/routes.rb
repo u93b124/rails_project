@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   # （月別）譲渡益集計 画面
   get 'tuki_jyoto_eki_syukei', to: 'tuki_jyoto_eki_syukei#index'
 
-  # 配当益集計 画面
+  # 配当金集計 画面
   get 'haito_eki_syukei', to: 'haito_eki_syukei#index'
 
   # CSVアップロード（更新処理）
