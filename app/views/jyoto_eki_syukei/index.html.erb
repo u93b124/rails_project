@@ -1,6 +1,8 @@
 <h1>譲渡益集計</h1>
 <h3>（受渡日：<font color = "red"><%= @nen %></font>年01月01日～
-<font color = "red"><%= @nen %></font>年12月31日）</h3><br>
+<font color = "red"><%= @nen %></font>年12月31日）
+<%= link_to "csvで出力する", jyoto_eki_syukei_path(format: :csv, nen: @nen) %>
+</h3><br>
 
 <table border="1">
     <tr>
@@ -8,7 +10,7 @@
       <th>勝ち数</th><th>負け数</th><th>勝率</th>
       <th>平均利益</th><th>平均損失</th>
     </tr>
-    
+
     <tr>
       <td><%= number_with_delimiter(@sum_plus) %></td>
       <td><font color="red"><%= number_with_delimiter(@sum_minus) %></font></td>
@@ -65,11 +67,11 @@
           <% tou_raku_ritu = ( (uri_tanka.to_f / kai_tanka.to_f) -1 ) * 100  %>
           <% if tou_raku_ritu < 0 %>
             <font color = "red">
-          <% end %>  
+          <% end %>
           <%= sprintf("%.2f", tou_raku_ritu) %>
           <% if tou_raku_ritu < 0 %>
-             </font>
-          <% end %> 
+            </font>
+          <% end %>
         </td>
         <td align="right">
           <% if jyoto_eki.son_eki_gaku < 0 %>
@@ -85,7 +87,7 @@
         <td><pre><%= MeigaraMemo.get_memo(jyoto_eki.code, @nen) %></pre></td>
       </tr>
     <% end %>
-  </div>      
+  </div>
 <% end %>
 
 
