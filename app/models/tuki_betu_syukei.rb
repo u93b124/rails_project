@@ -16,6 +16,8 @@ class TukiBetuSyukei
       table_name = "jyoto_eki_meisai2023s "
     when "2024" then
       table_name = "jyoto_eki_meisai2024s "
+    when "2025" then
+      table_name = "jyoto_eki_meisai2025s "
     end
 
     # SQL

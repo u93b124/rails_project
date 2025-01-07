@@ -18,19 +18,16 @@
 
 # [データベース構成]  
   - (DB名) development
-  - (TABLE名) jyoto_eki_meisai2020s
-  - (TABLE名) jyoto_eki_meisai2021s
-  - (TABLE名) jyoto_eki_meisai2022s
-  - (TABLE名) jyoto_eki_meisai2023s
+  - (TABLE名) jyoto_eki_meisai2020s～jyoto_eki_meisai20XXs
 
 # [画面仕様]  
   - アクセスURL ( http://192.168.56.2:3000/home/index )
   - トップメニュー画面
   - 譲渡益明細アップロード画面  
-    - CSVアップロード画面（2020年/2021年/2022年/2023年のCSVに対応）
-    - アップロード時に前処理として [2020/2021/2022 該当年] のテーブルレコードが全て削除される  
+    - CSVアップロード画面（20XX各年のCSVに対応）
+    - アップロード時に前処理として [20XX 該当年] のテーブルレコードが全て削除される  
     
-    ※ ToDo ⇒ 現状では、2024年以降は機能追加が必要
+    ※ ToDo ⇒ 現状では、20XX年以降は機能追加が必要
 
   - 譲渡益明細集計画面
     - 銘柄ごとの損益一覧（損益が大きい順に表示）
@@ -43,11 +40,9 @@
      - joto_eki_syukei_controller.rb　⇒　譲渡益修正画面コントローラ
 
    - 【app/models】
-     - jyoto_eki_meisai2020.rb
-     - jyoto_eki_meisai2021.rb
-     - jyoto_eki_meisai2022.rb
-     - jyoto_eki_meisai2023.rb
-      2020年～2023年のＣＳＶデータ格納テーブル (2024年以降は追加要)  
+     - jyoto_eki_meisai2020.rb～jyoto_eki_meisai20XX.rb
+
+      2020年～20XX年のＣＳＶデータ格納テーブル  
      - jyoto_eki_syukei.rb  
       　集計用ＳＱＬの実行モデル
 
@@ -68,9 +63,9 @@
    ⇒ developmentデータベースの作成
    ３
    4. rake db:migrate  
-   ⇒ jyoto_eki_meisai2020s～jyoto_eki_meisai2023s テーブルの作成
+   ⇒ jyoto_eki_meisai2020s～jyoto_eki_meisai20XXs テーブルの作成
 
-   ※(ToDo) 将来、2024年度のcsvファイルを格納するテーブル作成要。仕様の全面的な見直しも含め検討する。
+   ※(ToDo) 将来、20XX年度のcsvファイルを格納するテーブル作成要。仕様の全面的な見直しも含め検討する。
 
 # ■ ＣＳＶ集計の画面操作 手順  
 
@@ -85,7 +80,7 @@
       - CSVファイルを選択し、アップロードボタンを押下  
 
       2.2. ホームリンク を選択 ⇒ 譲渡益集計リンクを選択し、集計画面を参照する  
-　　　(画面上部リンクから 2020年～2023年 を切り替え可)  
+　　　(画面上部リンクから 2020年～20XX年 を切り替え可)  
 
 
   <BR>

@@ -16,6 +16,8 @@ class JyotoEkiSyukei
       table_name = "jyoto_eki_meisai2023s "
     when "2024" then
       table_name = "jyoto_eki_meisai2024s "
+    when "2025" then
+      table_name = "jyoto_eki_meisai2025s "
     end
 
     # SQL
@@ -31,6 +33,6 @@ class JyotoEkiSyukei
     query += "ORDER BY son_eki_gaku DESC "
 
     # 該当の証券コード毎に「株式現物買」の金額を取得する
-    ret = JyotoEkiMeisai2024.find_by_sql([query, from_date, to_date])
+    ret = JyotoEkiMeisai2025.find_by_sql([query, from_date, to_date])
   end
 end
