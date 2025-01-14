@@ -10,18 +10,21 @@ Rails.application.routes.draw do
 
   # 取引履歴集計 画面
   get 'son_eki', to: 'son_eki#index'
- 
+
   # 譲渡益集計 画面
   get 'jyoto_eki_syukei', to: 'jyoto_eki_syukei#index'
 
   # （月別）譲渡益集計 画面
   get 'tuki_jyoto_eki_syukei', to: 'tuki_jyoto_eki_syukei#index'
 
+  # （月別）配当金集計 画面
+  get 'tuki_haito_kin_syukei', to: 'tuki_haito_kin_syukei#index'
+
   # 配当金集計 画面
   get 'haito_eki_syukei', to: 'haito_eki_syukei#index'
 
   # CSVアップロード（更新処理）
-  post "/csv_upload"=> "csv_upload#csv_import" 
+  post "/csv_upload"=> "csv_upload#csv_import"
 
   # ホーム画面
   get 'home/index', to: 'home#index'

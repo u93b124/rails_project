@@ -1,0 +1,51 @@
+<h1>（月別）配当金集計 <font color = "red"><%= @nen %></font>年</h1>
+
+<h3>（受渡日：<font color = "red"><%= @nen %></font>年01月01日～
+<font color = "red"><%= @nen %></font>年12月31日）
+</h3><br>
+
+<% sum_plus = 0 %>
+<% if @son_eki != nil %>
+  <% @son_eki.each do |haito_eki| %>
+    <% sum_plus = sum_plus + haito_eki.son_eki_gaku %>
+  <% end %>
+<% end %>
+
+<table border="1">
+    <tr>
+      <th>配当額</th>
+      <th>課税金額</th>
+      <th>配当利益</th>
+    </tr>
+    <tr>
+      <td><%= number_with_delimiter(sum_plus) %></td>
+      <td><%= number_with_delimiter((sum_plus*Constants::TAX).floor) %></td>
+      <td>
+        <font color = "red">
+          <%= number_with_delimiter((sum_plus*(1 - Constants::TAX)).floor) %>
+        </font>
+      </td>
+    </tr>
+</table>
+<br>
+<%= link_to "2020年", tuki_haito_kin_syukei_path(nen: "2020") %>
+<%= link_to "2021年", tuki_haito_kin_syukei_path(nen: "2021") %>
+<%= link_to "2022年", tuki_haito_kin_syukei_path(nen: "2022") %>
+<%= link_to "2023年", tuki_haito_kin_syukei_path(nen: "2023") %>
+<%= link_to "2024年", tuki_haito_kin_syukei_path(nen: "2024") %>
+<%= link_to "2025年", tuki_haito_kin_syukei_path(nen: "2025") %>
+<br>
+
+<% month = 0 %>
+<table border="1">
+    <tr>
+      <th>月</th><th>損益</th>
+    </tr>
+
+    <% @son_eki.each do |son_eki| %>
+    <tr>
+      <td><%= month = month+1 %>月</td>
+      <td><%= number_with_delimiter(son_eki[:son_eki_gaku]) %></td>
+    </tr>
+    <% end %>
+</table>
