@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   # （月別）配当金集計 画面
   get 'tuki_haito_kin_syukei', to: 'tuki_haito_kin_syukei#index'
 
+  # （年別）集計 画面
+  get 'nen_betu_syukei', to: 'nen_betu_syukei#index'
+
   # 配当金集計 画面
   get 'haito_eki_syukei', to: 'haito_eki_syukei#index'
 
