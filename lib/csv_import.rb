@@ -7,21 +7,7 @@ module CsvImport extend ActiveSupport::Concern
   def import(file,gamen_kind, nendo)
 
     # インポート前に古いデータを一旦削除する
-    case nendo
-    when "2020" then
-      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2020s;")
-    when "2021" then
-      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2021s;")
-    when "2022" then
-      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2022s;")
-    when "2023" then
-      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2023s;")
-    when "2024" then
-      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2024s;")
-    when "2025" then
-      ActiveRecord::Base.connection.execute("TRUNCATE TABLE jyoto_eki_meisai2025s;")   
-    end
-
+    ActiveRecord::Base.connection.execute("DELETE FROM jyoto_eki_meisais WHERE ukewatasi BETWEEN " + nendo + "0101 AND " + nendo + "1231;")
 
     # CSVファイルを UTF8に変換して読み込む(lineno: 処理中の行番号1～)
     csv_contents = CSV.read(file.path, encoding: 'Shift_JIS:UTF-8')
@@ -39,22 +25,7 @@ module CsvImport extend ActiveSupport::Concern
         next if row[0].blank?
         next if ( row[0].include?("税") || row[0].include?("額") )
 
-
-        # 対象ＣＳＶ毎に格納テーブルを分けている
-        case nendo
-          when "2020" then
-            jyo_to_eki_meisai = JyotoEkiMeisai2020.new
-          when "2021" then
-            jyo_to_eki_meisai = JyotoEkiMeisai2021.new
-          when "2022" then
-            jyo_to_eki_meisai = JyotoEkiMeisai2022.new
-          when "2023" then
-            jyo_to_eki_meisai = JyotoEkiMeisai2023.new
-          when "2024" then
-            jyo_to_eki_meisai = JyotoEkiMeisai2024.new
-          when "2025" then
-            jyo_to_eki_meisai = JyotoEkiMeisai2025.new
-        end
+        jyo_to_eki_meisai = JyotoEkiMeisai.new
 
         # JyotoEkiMeisaiテーブルの各項目にcsv値[0]～[12]をセット
         jyo_to_eki_meisai.code         = row[0]

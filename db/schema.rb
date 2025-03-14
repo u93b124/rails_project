@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_07_095500) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_14_110500) do
   create_table "jyoto_eki_meisai2020s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "code"
     t.string "name"
@@ -102,6 +102,24 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_07_095500) do
   end
 
   create_table "jyoto_eki_meisai2025s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "code"
+    t.string "name"
+    t.string "torikesi"
+    t.date "yakujo_bi"
+    t.integer "count"
+    t.string "torihiki"
+    t.date "ukewatasi"
+    t.integer "baikyaku"
+    t.integer "hiyo"
+    t.date "syutoku_bi"
+    t.integer "sinki_gaku"
+    t.integer "son_eki_gaku"
+    t.integer "chiho"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "jyoto_eki_meisais", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "code"
     t.string "name"
     t.string "torikesi"

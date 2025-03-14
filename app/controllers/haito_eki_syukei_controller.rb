@@ -6,7 +6,6 @@ class HaitoEkiSyukeiController < ApplicationController
     @nen = params[:nen]
 
     # 銘柄毎の配当集計処理の呼び出し
-    @haito_eki_syukeis = HaitoEkiSyukei.get_soneki(params[:nen])
-
+    @haito_eki_syukeis = HaitoEkiSyukei.get_soneki(@nen)
   end
 end

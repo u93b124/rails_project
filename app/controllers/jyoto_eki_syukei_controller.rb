@@ -6,7 +6,7 @@ class JyotoEkiSyukeiController < ApplicationController
     @nen = params[:nen]
 
     # 銘柄毎の損益集計処理の呼び出し
-    @jyoto_eki_syukeis = JyotoEkiSyukei.get_soneki(params[:nen])
+    @jyoto_eki_syukeis = JyotoEkiSyukei.get_soneki(@nen)
     @sum_plus = 0
     @sum_minus = 0
     @count_plus = 0

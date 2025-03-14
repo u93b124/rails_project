@@ -1,0 +1,3 @@
+class JyotoEkiMeisai < ApplicationRecord
+
+end
