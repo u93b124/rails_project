@@ -36,7 +36,6 @@
    - 【app/models】
      - jyoto_eki_meisai.rb
 
-      ＣＳＶデータ格納テーブル
      - jyoto_eki_syukei.rb
       　集計用ＳＱＬの実行モデル
 
