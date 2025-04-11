@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   # 譲渡益集計 画面
   get 'jyoto_eki_syukei', to: 'jyoto_eki_syukei#index'
 
+  # 通算ランキング 画面
+  get 'tuusan_ranking', to: 'tuusan_ranking#index'
+
   # （月別）譲渡益集計 画面
   get 'tuki_jyoto_eki_syukei', to: 'tuki_jyoto_eki_syukei#index'
 
