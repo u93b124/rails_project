@@ -1,7 +1,4 @@
 <h1>通算ランキング</h1>
-<h3>
-<%= link_to "csvで出力する", jyoto_eki_syukei_path(format: :csv) %>
-</h3><br>
 
 <font color="green"><h3>損益額順</h3></font>
 <table border="1">
@@ -50,6 +47,7 @@
         </td>
         <td align="right"><font color="red">
           <%= number_with_delimiter(jyoto_eki.son_eki_gaku) %>
+          </font>
         </td>
         <td><%= jyoto_eki.kaituke_bi %></td>
         <td><%= jyoto_eki.baikyaku_bi %></td>
@@ -76,42 +74,38 @@
     </tr>
     </thead>
 
-<% if @tuusan_ranking_syukeis_ritu != nil %>
-  <div id="son_ekis">
-    <% i = 0 %>
-    <% @tuusan_ranking_syukeis_ritu.each do |nen_betu_rank| %>
-      <% if nen_betu_rank != nil %>
-        <% nen_betu_rank.each do |rank| %>
+    <% if @tuusan_ranking_syukeis_ritu != nil %>
+      <div id="son_ekis">
+        <% i = 0 %>
+        <% @tuusan_ranking_syukeis_ritu.each do |jyoto_eki| %>
           <tr>
+            <% break if i == 10 %> 
             <% i = i + 1 %>
             <td><%= i %></td>
-            <td><%= rank.code %></td>
-            <td><%= rank.name %></td>
-            <td align="right"><%= number_with_delimiter(rank.kabu_su) %></td>
+            <td><%= jyoto_eki.code %></td>
+            <td><%= jyoto_eki.name %></td>
+            <td align="right"><%= number_with_delimiter(jyoto_eki.kabu_su) %></td>
             <td align="right">
-              <% kai_tanka = rank.konyu_gaku / rank.kabu_su %>
+              <% kai_tanka = jyoto_eki.konyu_gaku / jyoto_eki.kabu_su %>
               <%= number_with_delimiter(kai_tanka) %>
             </td>
             <td align="right">
-              <% uri_tanka = (rank.konyu_gaku + rank.son_eki_gaku) / rank.kabu_su %>
+              <% uri_tanka = (jyoto_eki.konyu_gaku + jyoto_eki.son_eki_gaku) / jyoto_eki.kabu_su %>
               <%= number_with_delimiter(uri_tanka) %>
             </td>
             <td align="right">
-              <font color="red"><%= sprintf("%.2f", rank.tou_raku_ritu) %></font>
+              <font color="red">
+                <% tou_raku_ritu = ( (uri_tanka.to_f / kai_tanka.to_f) -1 ) * 100  %>
+                <%= sprintf("%.2f", tou_raku_ritu) %>
+              </font>
             </td>
             <td align="right">
-              <%= number_with_delimiter(rank.son_eki_gaku) %>
+              <%= number_with_delimiter(jyoto_eki.son_eki_gaku) %>
             </td>
-            <td><%= rank.kaituke_bi %></td>
-            <td><%= rank.baikyaku_bi %></td>
+            <td><%= jyoto_eki.kaituke_bi %></td>
+            <td><%= jyoto_eki.baikyaku_bi %></td>
           </tr>
-
-
-
-
         <% end %>
-      <% end %>
+      </div>
     <% end %>
-  </div>
-<% end %>
 </table>
