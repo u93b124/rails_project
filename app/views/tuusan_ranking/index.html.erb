@@ -1,6 +1,6 @@
 <h1>通算ランキング</h1>
 
-<font color="green"><h3>利益額順</h3></font>
+<font color="green"><h3>利益額</h3></font>
 <table border="1">
   <thead>
     <tr>
@@ -58,7 +58,7 @@
 </table>
 
 <BR>
-<font color="green"><h3>損失額順</h3></font>
+<font color="green"><h3>損失額</h3></font>
 <table border="1">
   <thead>
     <tr>
@@ -95,13 +95,7 @@
         </td>
         <td align="right">
           <% tou_raku_ritu = ( (uri_tanka.to_f / kai_tanka.to_f) -1 ) * 100  %>
-          <% if tou_raku_ritu < 0 %>
-            <font color = "red">
-          <% end %>
           <%= sprintf("%.2f", tou_raku_ritu) %>
-          <% if tou_raku_ritu < 0 %>
-            </font>
-          <% end %>
         </td>
         <td align="right"><font color="red">
           <%= number_with_delimiter(jyoto_eki.son_eki_gaku) %>
@@ -115,10 +109,7 @@
 <% end %>
 </table>
 
-
-
-
-<br><font color="green"><h3>上昇率順</h3></font>
+<br><font color="green"><h3>上昇率</h3></font>
 <table border="1">
   <thead>
     <tr>
@@ -135,10 +126,63 @@
     </tr>
     </thead>
 
-    <% if @tuusan_ranking_syukeis_ritu != nil %>
+    <% if @tuusan_ranking_syukeis_rieki_ritu != nil %>
       <div id="son_ekis">
         <% i = 0 %>
-        <% @tuusan_ranking_syukeis_ritu.each do |jyoto_eki| %>
+        <% @tuusan_ranking_syukeis_rieki_ritu.each do |jyoto_eki| %>
+          <tr>
+            <% break if i == 10 %> 
+            <% i = i + 1 %>
+            <td><%= i %></td>
+            <td><%= jyoto_eki.code %></td>
+            <td><%= jyoto_eki.name %></td>
+            <td align="right"><%= number_with_delimiter(jyoto_eki.kabu_su) %></td>
+            <td align="right">
+              <% kai_tanka = jyoto_eki.konyu_gaku / jyoto_eki.kabu_su %>
+              <%= number_with_delimiter(kai_tanka) %>
+            </td>
+            <td align="right">
+              <% uri_tanka = (jyoto_eki.konyu_gaku + jyoto_eki.son_eki_gaku) / jyoto_eki.kabu_su %>
+              <%= number_with_delimiter(uri_tanka) %>
+            </td>
+            <td align="right">
+              <font color="red">
+                <% tou_raku_ritu = ( (uri_tanka.to_f / kai_tanka.to_f) -1 ) * 100  %>
+                <%= sprintf("%.2f", tou_raku_ritu) %>
+              </font>
+            </td>
+            <td align="right">
+              <%= number_with_delimiter(jyoto_eki.son_eki_gaku) %>
+            </td>
+            <td><%= jyoto_eki.kaituke_bi %></td>
+            <td><%= jyoto_eki.baikyaku_bi %></td>
+          </tr>
+        <% end %>
+      </div>
+    <% end %>
+</table>
+
+<br><font color="green"><h3>下落率</h3></font>
+<table border="1">
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>コード</th>
+      <th>会社名</th>
+      <th>株数</th>
+      <th>買付株価</th>
+      <th>売却単価</th>
+      <th><font color="red">下落率</font></th>
+      <th>損益額</th>
+      <th>買付日</th>
+      <th>売却日</th>
+    </tr>
+    </thead>
+
+    <% if @tuusan_ranking_syukeis_sonsitu_ritu != nil %>
+      <div id="son_ekis">
+        <% i = 0 %>
+        <% @tuusan_ranking_syukeis_sonsitu_ritu.each do |jyoto_eki| %>
           <tr>
             <% break if i == 10 %> 
             <% i = i + 1 %>

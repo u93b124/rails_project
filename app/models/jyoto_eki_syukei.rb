@@ -61,4 +61,22 @@ class JyotoEkiSyukei
     ret = JyotoEkiMeisai.find_by_sql([query, from_date, to_date])
   end
 
+  # 通算ランキング（利益率／損失率）
+  def self.get_tuusan_ranking_ritu(order_by)
+
+    # SQLで1度に集計できないので、2020年から各年でループする
+    son_eki = []
+    (2020..Date.current.year).each do |nen|
+      son_eki << self.get_tuusan_ranking("ritu", nen.to_s, order_by)
+    end
+
+    if order_by == "DESC"
+      # 利益率ランキングでは騰落率の降り順にソートする
+      son_eki_sort = son_eki.flatten.sort_by {|x| -x["tou_raku_ritu"] } 
+    else
+      # 損失率ランキングでは騰落率の降り順にソートする
+      son_eki_sort = son_eki.flatten.sort_by {|x| x["tou_raku_ritu"] } 
+    end
+  end
+
 end
