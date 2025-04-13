@@ -25,16 +25,16 @@ class JyotoEkiSyukei
   end
 
   # 譲渡益明細ＤＢから投資来の通算での銘柄毎の損益を算出する
-  def self.get_tuusan_ranking(kind, nen=nil)
+  def self.get_tuusan_ranking(kind, nen=nil, order_by)
     # 日付の組み立て
     if kind == "ritu"
       from_date = nen + "-01-01"
       to_date = nen + "-12-31"
-      order_kind = "tou_raku_ritu"
+      order_item = "tou_raku_ritu"
     else
       from_date = "2020-01-01"
       to_date = Date.current.year.to_s + "-12-31"
-      order_kind = "son_eki_gaku"
+      order_item = "son_eki_gaku"
     end
 
     table_name = "jyoto_eki_meisais "
@@ -54,7 +54,7 @@ class JyotoEkiSyukei
     query += "AND torihiki <> '信用配当金' "
     query += "AND torihiki <> '資本剰余金配当/みなし譲渡' "
     query += "GROUP BY code  "
-    query += "ORDER BY " + order_kind + " DESC "
+    query += "ORDER BY " + order_item + " " + order_by + " "
     query += "LIMIT 10 " # SQL側で各年のベスト１０まで取得しておきビュー側で全体のベスト１０まで絞る
 
     # 該当の証券コード毎に「株式現物買」の金額を取得する

@@ -54,7 +54,7 @@
 
    3. rake db:crate
    ⇒ developmentデータベースの作成
-   ３
+
    4. rake db:migrate
    ⇒ テーブルの作成
 
