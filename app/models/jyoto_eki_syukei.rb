@@ -24,20 +24,18 @@ class JyotoEkiSyukei
     ret = JyotoEkiMeisai.find_by_sql([query, from_date, to_date])
   end
 
-  # 譲渡益明細ＤＢから投資来の通算での銘柄毎の損益を算出する
-  def self.get_tuusan_ranking(kind, nen=nil, order_by)
-    # 日付の組み立て
+  # 全投資期間における各銘柄の損益ランキングを算出する
+  def self.get_tuusan_ranking(kind, nen, order_by)
+    # SQLパラメータの組み立て
+    from_date = nen + "-01-01"
+    to_date = nen + "-12-31"
+    table_name = "jyoto_eki_meisais "
+
     if kind == "ritu"
-      from_date = nen + "-01-01"
-      to_date = nen + "-12-31"
       order_item = "tou_raku_ritu"
     else
-      from_date = "2020-01-01"
-      to_date = Date.current.year.to_s + "-12-31"
       order_item = "son_eki_gaku"
     end
-
-    table_name = "jyoto_eki_meisais "
 
     # SQL
     query = "SELECT code ,"
@@ -57,8 +55,25 @@ class JyotoEkiSyukei
     query += "ORDER BY " + order_item + " " + order_by + " "
     query += "LIMIT 10 " # SQL側で各年のベスト１０まで取得しておきビュー側で全体のベスト１０まで絞る
 
-    # 該当の証券コード毎に「株式現物買」の金額を取得する
     ret = JyotoEkiMeisai.find_by_sql([query, from_date, to_date])
+  end
+
+  # 通算ランキング（利益額／損失額）
+  def self.get_tuusan_ranking_gaku(order_by)
+
+    # SQLで1度に集計できないので、2020年から各年でループする
+    son_eki = []
+    (2020..Date.current.year).each do |nen|
+      son_eki << self.get_tuusan_ranking("gaku", nen.to_s, order_by)
+    end
+
+    if order_by == "DESC"
+      # 利益額ランキングでは損益額の降り順にソートする
+      son_eki_sort = son_eki.flatten.sort_by {|x| -x["son_eki_gaku"] } 
+    else
+      # 損失額ランキングでは損益額の上り順にソートする
+      son_eki_sort = son_eki.flatten.sort_by {|x| x["son_eki_gaku"] } 
+    end
   end
 
   # 通算ランキング（利益率／損失率）
@@ -74,7 +89,7 @@ class JyotoEkiSyukei
       # 利益率ランキングでは騰落率の降り順にソートする
       son_eki_sort = son_eki.flatten.sort_by {|x| -x["tou_raku_ritu"] } 
     else
-      # 損失率ランキングでは騰落率の降り順にソートする
+      # 損失率ランキングでは騰落率の上り順にソートする
       son_eki_sort = son_eki.flatten.sort_by {|x| x["tou_raku_ritu"] } 
     end
   end

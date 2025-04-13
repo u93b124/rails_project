@@ -10,7 +10,7 @@
       <th>株数</th>
       <th>買付株価</th>
       <th>売却単価</th>
-      <th>騰落率</th>
+      <th>上昇率</th>
       <th><font color="red">利益額</font></th>
       <th>買付日</th>
       <th>売却日</th>
@@ -22,6 +22,7 @@
     <% i = 0 %>
     <% @tuusan_ranking_syukeis_rieki_gaku.each do |jyoto_eki| %>
       <tr>
+        <% break if i == 10 %> 
         <% i = i + 1 %>
         <td><%= i %></td>
         <td><%= jyoto_eki.code %></td>
@@ -68,7 +69,7 @@
       <th>株数</th>
       <th>買付株価</th>
       <th>売却単価</th>
-      <th>騰落率</th>
+      <th>下落率</th>
       <th><font color="red">損失額</font></th>
       <th>買付日</th>
       <th>売却日</th>
@@ -80,6 +81,7 @@
     <% i = 0 %>
     <% @tuusan_ranking_syukeis_sonsitu_gaku.each do |jyoto_eki| %>
       <tr>
+        <% break if i == 10 %> 
         <% i = i + 1 %>
         <td><%= i %></td>
         <td><%= jyoto_eki.code %></td>
@@ -120,7 +122,7 @@
       <th>買付株価</th>
       <th>売却単価</th>
       <th><font color="red">上昇率</font></th>
-      <th>損益額</th>
+      <th>利益額</th>
       <th>買付日</th>
       <th>売却日</th>
     </tr>
@@ -173,7 +175,7 @@
       <th>買付株価</th>
       <th>売却単価</th>
       <th><font color="red">下落率</font></th>
-      <th>損益額</th>
+      <th>損失額</th>
       <th>買付日</th>
       <th>売却日</th>
     </tr>
