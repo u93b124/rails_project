@@ -56,7 +56,7 @@
     <% @son_eki.each do |son_eki| %>
     <tr>
       <td><%= son_eki[:month_column].slice(4,2) %>月</td>
-      <td>
+      <td align="right">
         <% if son_eki[:son_eki_gaku] < 0 %>
           <font color="red">
         <% end %>
