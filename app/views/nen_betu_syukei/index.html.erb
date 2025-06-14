@@ -20,7 +20,7 @@
         <% total_kazei_gaku = total_kazei_gaku + (son_eki.son_eki_gaku*Constants::TAX).floor %>
         <% total_zeibiki_gaku = total_zeibiki_gaku + (son_eki.son_eki_gaku*(1 - Constants::TAX)).floor %>
 
-        <tr>
+        <tr align="right">
           <td><%= son_eki.year_column %></td>
           <td><%= number_with_delimiter(son_eki.son_eki_gaku) %></td>
           <td><%= number_with_delimiter((son_eki.son_eki_gaku*Constants::TAX).floor) %></td>
@@ -34,12 +34,11 @@
     <% end %>
   <% end %>
 
-  <tr><tr>
+  <tr><tr align="right">
     <td>累計</td>
     <td><%= number_with_delimiter(total_son_eki_gaku) %></td>
     <td><%= number_with_delimiter(total_kazei_gaku) %></td>
     <td><font color = "red"><%= number_with_delimiter(total_zeibiki_gaku) %></font></td>
   </tr></tr>
-
 </table>
 
