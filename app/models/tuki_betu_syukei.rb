@@ -43,7 +43,7 @@ class TukiBetuSyukei
     query += "GROUP BY month_column "
     query += "ORDER BY month_column "
 
-    # 該当の証券コード毎に「株式現物買」の金額を取得する
+    # 該当の証券コード毎に「配当金」の金額を取得する
     ret = JyotoEkiMeisai.find_by_sql([query, from_date, to_date])
 
   end

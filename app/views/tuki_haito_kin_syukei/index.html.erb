@@ -44,7 +44,7 @@
 
     <% @son_eki.each do |son_eki| %>
     <tr>
-      <td><%= month = month+1 %>月</td>
+      <td><%= son_eki[:month_column].slice(4,2) %>月</td>
       <td><%= number_with_delimiter(son_eki[:son_eki_gaku]) %></td>
     </tr>
     <% end %>
