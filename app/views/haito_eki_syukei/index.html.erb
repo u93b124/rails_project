@@ -41,7 +41,7 @@
       <th>会社名</th>
       <th>株数</th>
       <th>配当額</th>
-      <th>約定日</th>
+      <th>受渡日</th>
     </tr>
     </thead>
 
@@ -58,10 +58,10 @@
         <td align="right">
           <%= number_with_delimiter(haito_eki.son_eki_gaku) %>
         </td>
-        <td><%= haito_eki.baikyaku_bi %></td>
+        <td><%= haito_eki.ukewatasi_bi %></td>
       </tr>
     <% end %>
-  </div>      
+  </div>
 <% end %>
 
 

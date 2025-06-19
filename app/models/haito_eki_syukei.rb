@@ -1,4 +1,4 @@
-class HaitoEkiSyukei 
+class HaitoEkiSyukei
     # 譲渡益明細ＤＢから配当金を集計する
   def self.get_soneki(nen)
     # 日付の組み立て
@@ -8,8 +8,9 @@ class HaitoEkiSyukei
     table_name = "jyoto_eki_meisais "
 
     # SQL
-    query = "SELECT code, MAX(name) as name, SUM(son_eki_gaku) as son_eki_gaku, " 
+    query = "SELECT code, MAX(name) as name, SUM(son_eki_gaku) as son_eki_gaku, "
     query += "MIN(syutoku_bi) AS kaituke_bi, MAX(yakujo_bi) AS baikyaku_bi, "
+    query += "MIN(ukewatasi) AS ukewatasi_bi, "
     query += "SUM(count) AS kabu_su, SUM(sinki_gaku) AS konyu_gaku "
     query += "FROM " + table_name
     query += "WHERE ukewatasi BETWEEN ? and ?"
