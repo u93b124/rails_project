@@ -12,15 +12,15 @@
 
   <body>
     <div class ="diary_header">
-      <span class="header_link"><a href="http://192.168.56.2:3000/home/index">ホーム</a></span></span>
-      <span class="header_link"><a href="http://192.168.56.2:3000/csv_upload/index_jyo_to_eki">譲渡益明細アップロード</a></span>
-      <span class="header_link"><a href="http://192.168.56.2:3000/jyoto_eki_syukei?nen=2025">譲渡益明細集計</a></span>
-      <span class="header_link"><a href="http://192.168.56.2:3000/tuusan_ranking">通算ランキング</a></span>
-      <span class="header_link"><a href="http://192.168.56.2:3000/tuki_jyoto_eki_syukei?nen=2025">月別譲渡益</a></span>
-      <span class="header_link"><a href="http://192.168.56.2:3000/haito_eki_syukei?nen=2025">配当金集計</a></span>
-      <span class="header_link"><a href="http://192.168.56.2:3000/tuki_haito_kin_syukei?nen=2025">月別配当金</a></span>
-      <span class="header_link"><a href="http://192.168.56.2:3000/nen_betu_syukei">年別集計</a></span>
-      <span class="header_link"><a href="http://192.168.56.2:3000/meigara_memos?nendo=2025">銘柄メモ</a></span>
+    <span class="header_link"><%= link_to "ホーム", home_index_path %></span>
+    <span class="header_link"><%= link_to "譲渡益明細アップロード", csv_upload_index_jyo_to_eki_path %></span>
+    <span class="header_link"><%= link_to "譲渡益明細集計", jyoto_eki_syukei_path(nen: Date.current.year) %></span>
+    <span class="header_link"><%= link_to "通算ランキング", tuusan_ranking_path %></span>
+    <span class="header_link"><%= link_to "月別譲渡益", tuki_jyoto_eki_syukei_path(nen: Date.current.year) %></span>
+    <span class="header_link"><%= link_to "配当金集計", haito_eki_syukei_path(nen: Date.current.year) %></span>
+    <span class="header_link"><%= link_to "月別配当金", tuki_haito_kin_syukei_path(nen: Date.current.year) %></span>
+    <span class="header_link"><%= link_to "年別集計", nen_betu_syukei_path %></span>
+    <span class="header_link"><%= link_to "銘柄メモ", meigara_memos_path(nendo: Date.current.year) %></span>
     </div>
     <div class ="diary_body">
       <%= yield %> 

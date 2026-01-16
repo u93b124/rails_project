@@ -28,12 +28,10 @@
     </tr>
 </table>
 <br>
-<%= link_to "2020年", tuki_haito_kin_syukei_path(nen: "2020") %>
-<%= link_to "2021年", tuki_haito_kin_syukei_path(nen: "2021") %>
-<%= link_to "2022年", tuki_haito_kin_syukei_path(nen: "2022") %>
-<%= link_to "2023年", tuki_haito_kin_syukei_path(nen: "2023") %>
-<%= link_to "2024年", tuki_haito_kin_syukei_path(nen: "2024") %>
-<%= link_to "2025年", tuki_haito_kin_syukei_path(nen: "2025") %>
+
+<% (2020..Date.current.year).each do |year| %>
+  <%= link_to "#{year}年", tuki_haito_kin_syukei_path(nen: year.to_s) %>
+<% end %>
 <br>
 
 <% month = 0 %>

@@ -1,7 +1,5 @@
 module CsvImport extend ActiveSupport::Concern
-  UPLOAD_NEN =  [["2020年", "2020"], ["2021年", "2021"], 
-                ["2022年", "2022"], ["2023年", "2023"], 
-                ["2024年", "2024"], ["2025年", "2025"]]
+  UPLOAD_NEN = (2020..Date.current.year).map { |y| ["#{y}年", y.to_s] }
 
   #引数：file,gamen_kind(取引履歴:tori／企業マスタ:kigyo) , :nendo（年度）
   def import(file,gamen_kind, nendo)

@@ -1,34 +1,37 @@
 <br><hr>
 <menu>
-  <li><a href="http://192.168.56.2:3000/csv_upload/index_jyo_to_eki">譲渡益明細アップロード</a>
-</menu>
-<br><hr>
-<menu>
-  <li><a href="http://192.168.56.2:3000/jyoto_eki_syukei?nen=2025">譲渡益明細集計</a>
-</menu>
-<br><hr>
-<menu>
-  <li><a href="http://192.168.56.2:3000/tuusan_ranking">通算ランキング</a>
-</menu>
-<br><hr>
-<menu>
-  <li><a href="http://192.168.56.2:3000/tuki_jyoto_eki_syukei?nen=2025">月別譲渡益</a>
-</menu>
-<br><hr>
-<menu>
-  <li><a href="http://192.168.56.2:3000/haito_eki_syukei?nen=2025">配当金集計</a>
-</menu>
-<br><hr>
-<menu>
-  <li><a href="http://192.168.56.2:3000/tuki_haito_kin_syukei?nen=2025">月別配当金</a>
-</menu>
-<br><hr>
-<menu>
-  <li><a href="http://192.168.56.2:3000/nen_betu_syukei">年別集計</a>
-</menu>
-<br><hr>
-<menu>
-  <li><a href="http://192.168.56.2:3000/meigara_memos?nendo=2025">銘柄メモ</a>
+  <li><%= link_to "譲渡益明細アップロード", csv_upload_index_jyo_to_eki_path %></li>
 </menu>
 
+<br><hr>
+<menu>
+  <li><%= link_to "譲渡益明細集計", jyoto_eki_syukei_path(nen: Date.current.year) %></li>
+</menu>
+
+<br><hr>
+<menu>
+  <li><%= link_to "通算ランキング", tuusan_ranking_path %></li>
+</menu>
+
+<br><hr>
+<menu>
+  <li><%= link_to "月別譲渡益", tuki_jyoto_eki_syukei_path(nen: Date.current.year) %></li>
+</menu>
+
+<br><hr>
+<menu>
+  <li><%= link_to "配当金集計", haito_eki_syukei_path(nen: Date.current.year) %></li>
+</menu>
+
+<br><hr>
+<menu>
+  <li><%= link_to "月別配当金", tuki_haito_kin_syukei_path(nen: Date.current.year) %></li>
+</menu>
+
+<br><hr>
+<menu>
+  <li><%= link_to "年別集計", nen_betu_syukei_path %></li>
+</menu>
+
+<br><hr>
 <br>
